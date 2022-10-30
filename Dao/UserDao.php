@@ -20,5 +20,5 @@ class UserDao {
         mysqli_close(DB_LINK);
     }
 }
-
+//CREATE TABLE Users (ID int NOT NULL AUTO_INCREMENT, Name varchar(255), Email varchar(255), Password varchar(255), Role varchar(255), Cart varchar(255), PRIMARY KEY (ID));
 ?>

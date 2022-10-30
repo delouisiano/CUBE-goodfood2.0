@@ -20,5 +20,5 @@ class RestarantDao {
         mysqli_close(DB_LINK);
     }
 }
-
+// CREATE TABLE Restaurants (ID int NOT NULL AUTO_INCREMENT, Name varchar(255), PRIMARY KEY (ID));
 ?>

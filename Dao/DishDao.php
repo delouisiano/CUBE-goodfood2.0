@@ -20,4 +20,5 @@
             mysqli_close(DB_LINK);
         }
     }
+// CREATE TABLE Dishes (ID int NOT NULL AUTO_INCREMENT, RestaurantId int, Name varchar(255), Price varchar(255), Type varchar(255), PRIMARY KEY (ID));
 ?>
