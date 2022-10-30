@@ -12,43 +12,35 @@
 	</head>
 
 	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">GOOD FOOD !!!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-		<!--  nav a claque dans le Template -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="index.php">Carte</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="panier.php">Panier<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="authentification.php">Connexion/Inscription<span class="sr-only"></span></a>
+                </li>
+            </ul>
 
-		<nav class="navbar navbar-expand-lg bg-light">
-
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="\index.php">GOOD FOOD!!!!</a>
-		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		      <span class="navbar-toggler-icon"></span>
-		    </button>
-		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="\index.php">Accueil</a>
-		        </li>
-		         <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="\authentification.php">Connexion / Inscription</a>
-		        </li>
-				<!--
-		        <li class="nav-item dropdown">
-		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		            Dropdown
-		          </a>
-		          <ul class="dropdown-menu">
-		            <li><a class="dropdown-item" href="#">Action</a></li>
-		            <li><a class="dropdown-item" href="#">Another action</a></li>
-		            <li><hr class="dropdown-divider"></li>
-		            <li><a class="dropdown-item" href="#">Something else here</a></li>
-		          </ul>
-		        </li>
-		    	-->
-		      </ul>
-		    </div>
-		  </div>
-
-		</nav>
-
+            <form class="form-inline my-2 my-lg-0">
+                <a class="btn btn-success btn-sm ml-3" href="panier.php">
+                    <i class="fa fa-shopping-cart"></i> Panier
+                    <span class="badge badge-light">3</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
 		<br><br>
 
 		<!--  INSCRIPTION -->
