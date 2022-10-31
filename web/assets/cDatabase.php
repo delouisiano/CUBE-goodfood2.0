@@ -67,7 +67,7 @@ class cDatabase {
 
     static function getpanier() {
         $bdd = self::connectDb();
-        $sql = " SELECT a.price,a.picture,a.title,p.id,p.quantite FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+        $sql = " SELECT a.price,a.picture,a.title,p.id,p.quantite FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -95,7 +95,7 @@ class cDatabase {
 
     static function getSousTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -109,7 +109,7 @@ class cDatabase {
 
     static function getTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -193,7 +193,7 @@ class cDatabase {
 
     static function getcardpanier() {
         $bdd = self::connectDb();
-        $sql = "select distinct 1,(SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as tt,(SELECT sum(p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as quantite from panier where id_user = " . $_SESSION['Compte']['id'] . "";
+        $sql = "select distinct 1,(SELECT sum(a.price*p.quantite) as price FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as tt,(SELECT sum(p.quantite) as price FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as quantite from paniers where id_user = " . $_SESSION['Compte']['id'] . "";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
