@@ -31,10 +31,18 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 
 		            <form class="form-inline my-2 my-lg-0">
 						<?php 
-						if ($_SESSION['Compte'] != false) { cDatabase::getcardpanier();?>
+						if ($_SESSION['Compte'] != false) { 
+						?>
+						<a class="btn btn-warning btn-sm ml-3" href="commande.php">
+							<i class="fa fa-shopping-cart"></i>Commande
+							</a> 
+						<?php
+							cDatabase::getcardpanier();
+						?>
 							<a class="btn btn-danger btn-sm ml-3" href="authentification.php">
 			                	<i class="fa fa-shopping-cart"></i>Déconnexion
 			             	</a>
+
 						<?php } else{ ?>
 							<a class="btn btn-warning btn-sm ml-3" href="authentification.php">
 							<i class="fa fa-shopping-cart"></i>S'Identifier

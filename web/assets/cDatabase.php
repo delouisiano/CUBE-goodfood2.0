@@ -79,6 +79,20 @@ class cDatabase {
         }
     }
 
+    static function getlignescommandes($id_commande) {
+        $bdd = self::connectDb();
+        $sql = "SELECT * FROM lignes_commandes c , articles a where c.id_commande = " . $id_commande . " and a.id =c.id_article";
+
+        $result = $bdd->query($sql);
+        $lignescommandes = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($lignescommandes) {
+            forEach($lignescommandes as $value) {
+                getlignescommandes($value['title'],$value['picture'],$value['price']*$value['quantite'],$value['quantite']);
+            }
+        }
+    }
+
     static function getSousTotal() {
         $bdd = self::connectDb();
         $sql = " SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
@@ -105,7 +119,77 @@ class cDatabase {
                 getTotal($value['price']+4.99);
             }
         } 
-        }
+    }
+
+    static function getSousTotalCommande($id_commande) {
+        $bdd = self::connectDb();
+        $sql = "SELECT sum(a.price*p.quantite) as price FROM lignes_commandes p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . "";
+        $result = $bdd->query($sql);
+        $tt = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($tt) {
+            forEach($tt as $value) {
+                getSousTotal($value['price']);
+            }
+        } 
+    }
+
+    static function getTotalCommande($id_commande) {
+        $bdd = self::connectDb();
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_commandes  p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . " ";
+
+        $result = $bdd->query($sql);
+        $tt = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($tt) {
+            forEach($tt as $value) {
+                getTotal($value['price']+4.99);
+            }
+        } 
+    }  
+
+    static function getCommande() {
+        $bdd = self::connectDb();
+        $sql = " SELECT * FROM `commandes` where id_user = " . $_SESSION['Compte']['id'] . " ";
+
+        $result = $bdd->query($sql);
+        $commandes = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($commandes) {
+            forEach($commandes as $value) {
+                ?>
+                <div class="container mb-4">
+                    <div class="row">
+                        <div class="col-14">
+                            <div class="table-responsive">
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"> </th>
+                                            <th scope="col">Produit</th>
+                                            <th scope="col" class="text-center">Quantité</th>
+                                            <th scope="col" class="text-right">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            cDatabase::getlignescommandes($value['id']);
+                                            cDatabase::getSousTotalCommande($value['id']);
+                                            getLivraison("4.99");
+                                            cDatabase::getTotalCommande($value['id']);
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <?php  
+            }
+        } 
+    }    
 
     static function getcardpanier() {
         $bdd = self::connectDb();
