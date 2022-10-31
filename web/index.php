@@ -134,7 +134,7 @@ function boisson($name,$img,$price) {
 ?>
 
 <?php
-function sandwich($name,$img,$price,$content) {
+function sandwich($name,$img,$price,$content,$vegetarien,$vegan) {
 ?>
 
     <div class="col">
@@ -143,8 +143,20 @@ function sandwich($name,$img,$price,$content) {
       		<div class="card-body">
       			<div class="text-center">
        				<h5 class="card-title"><?php echo $name ?></h5>
-       				<img src= "assets\vegan.jpg" class="img" alt="image" height="30" width="30">
-       				<img src= "assets\végétarien.jpg" class="img" alt="image" height="30" width="30">
+       				<?php
+       				if($vegetarien == 1){
+       				?>
+       					<img src= "assets\vegan.jpg" class="img" alt="image" height="30" width="30">
+       				<?php
+       				}
+       				?>
+       				<?php
+       				if($vegan == 1){
+       				?>
+       					<img src= "assets\végétarien.jpg" class="img" alt="image" height="30" width="30">
+       				<?php
+       				}
+       				?>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
         			<button type="submit" class="btn btn-primary">Commander</button>
         		</div>	

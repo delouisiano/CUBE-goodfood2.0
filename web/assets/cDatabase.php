@@ -46,7 +46,7 @@ class cDatabase {
 
             if ($sandwich) {
                 forEach($sandwich as $value) {
-                    sandwich($value['title'], $value['picture'],$value['price'],"");
+                    sandwich($value['title'], $value['picture'],$value['price'],"",$value['vegetarien'],$value['vegan']);
                 }
             }
     }
