@@ -34,7 +34,7 @@ class cDatabase {
                     boisson($value['title'], $value['picture'],$value['price']);
                 }
 
-            } else { echo "<h5>Pas encore d'article !</h5>"; }
+            }
     }
 
     static function getSandwich() {
@@ -48,7 +48,7 @@ class cDatabase {
                 forEach($sandwich as $value) {
                     sandwich($value['title'], $value['picture'],$value['price'],"");
                 }
-            } else { echo "<h5>Pas encore d'article !</h5>"; }
+            }
     }
 
     static function getmenu() {
@@ -62,6 +62,62 @@ class cDatabase {
                 forEach($menu as $value) {
                     menu($value['title'], $value['picture'],$value['price'],"");
                 }
-            } else { echo "<h5>Pas encore d'article !</h5>"; }
+            }
+    }
+
+    static function getpanier() {
+        $bdd = self::connectDb();
+        $sql = " SELECT a.price,a.picture,a.title,p.id,p.quantite FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+
+        $result = $bdd->query($sql);
+        $panier = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($panier) {
+            forEach($panier as $value) {
+                Article($value['title'],$value['picture'],$value['price'],$value['quantite']);
+            }
+        }
+    }
+
+    static function getSousTotal() {
+        $bdd = self::connectDb();
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+
+        $result = $bdd->query($sql);
+        $tt = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($tt) {
+            forEach($tt as $value) {
+                getSousTotal($value['price']);
+            }
+        } 
+    }
+
+    static function getTotal() {
+        $bdd = self::connectDb();
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+
+        $result = $bdd->query($sql);
+        $tt = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($tt) {
+            forEach($tt as $value) {
+                getTotal($value['price']+4.99);
+            }
+        } 
+        }
+
+    static function getcardpanier() {
+        $bdd = self::connectDb();
+        $sql = "select distinct 1,(SELECT sum(a.price*p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as tt,(SELECT sum(p.quantite) as price FROM panier p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . ") as quantite from panier where id_user = " . $_SESSION['Compte']['id'] . "";
+
+        $result = $bdd->query($sql);
+        $panier = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($panier) {
+            forEach($panier as $value) {
+                getPanier($value['quantite'],$value['tt']);
+            }
+        } 
     }
 }

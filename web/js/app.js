@@ -54,10 +54,7 @@ document.getElementById("inscription").addEventListener("submit", function(e) {
 	if (err == "") {
 
 		//SÉLECTION DU FICHIER DE L'API
-		xhr.open("POST", "API/apipdo.php", true);
-
-		//FORCE TYPE DE RÉPONSE => JSON
-		//xhr.responseType = "json";
+		xhr.open("POST", "API/inscription.php", true);
 
 		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -72,8 +69,6 @@ document.getElementById("inscription").addEventListener("submit", function(e) {
 	//FONCTION DONC RETOUR (USELESS)
 	return false;
 });
-
-
 
 //ÉCOUTEUR SUR L'ACTION CLIC DU FORMULAIRE DE CONNEXION
 document.getElementById("connexion").addEventListener("submit", function(e) {
@@ -93,10 +88,6 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
 	localStorage.setItem("mdp",document.querySelector("#mdpco").value);
 	localStorage.setItem("mail",document.querySelector("#mailco").value);
 
-	//AFFICHE LE LOCAL STORAGE EN CONSOLE
-	console.log(localStorage.getItem("mail"));
-	console.log(localStorage.getItem("mdp"));
-
 	//CHECK SUE LE FORMULAIRE
 	//TEST SI UN CHAMPS DU FORMULAIRE EST VIDE
 	if (localStorage.getItem("mail") == "" || localStorage.getItem("mdp") == "" ) {
@@ -105,35 +96,15 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
 
 	if (err == "") {
 	
-
-		xhr.onreadystatechange = function() {
-			
-			if (this.readyState == 4 && this.status == 200) {
-				console.log(this.response);
-				var res = this.response;
-				if (res.success) {
-					console.log("Utilisateur Connecter !");
-				} 
-				else{
-					alert(res.msg);
-				}
-			} 
-			else if (this.readyState == 4) {
-				alert("Une erreur est survenue... héberge en local l'appli");
-			}
-		};
-
 		//SÉLECTION DU FICHIER DE L'API
-		xhr.open("POST", "Users\jdut\Desktop\général\Nouveau dossier (2)\test php\async", true);
-
-		//FORCE TYPE DE RÉPONSE => JSON
-		//xhr.responseType = "json";
+		xhr.open("POST", "API/connexion.php", true);
 
 		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		//EVOIE DES DONNÉES
-		xhr.send(data);
+		xhr.send("mail="+localStorage.getItem("mail")+"&mdp="+localStorage.getItem("mdp"));
+		//document.location.href="http://jdut/index.php"; 
 	}
 	else{
 		//AFFICHAGE DE L'ERREUR SUR LA VUE

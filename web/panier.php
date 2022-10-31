@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+session_start();
+require_once(__DIR__ . '\assets\cDatabase.php');
+?>
+
 <head>
     <meta charset="utf-8">
     <title>Panier</title>
@@ -8,34 +13,35 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">GOOD FOOD !!!</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="container">
+                <a class="navbar-brand" href="index.php">GOOD FOOD !!!</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-            <ul class="navbar-nav m-auto">
-                <li class="nav-item m-auto">
-                    <a class="nav-link" href="index.php">Carte</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="panier.php">Panier<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="authentification.php">Connexion/Inscription<span class="sr-only"></span></a>
-                </li>
-            </ul>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    <ul class="navbar-nav m-auto">
 
-            <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-success btn-sm ml-3" href="panier.php">
-                    <i class="fa fa-shopping-cart"></i> Panier
-                    <span class="badge badge-light">3</span>
-                </a>
-            </form>
-        </div>
-    </div>
-</nav>
+                        <li class="nav-item m-auto">
+                            <a class="nav-link" href="index.php">Carte</a>
+                        </li>
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <?php 
+                        if (isset($_SESSION['Compte'])) { cDatabase::getcardpanier();?>
+                            <a class="btn btn-danger btn-sm ml-3" href="panier.php">
+                                <i class="fa fa-shopping-cart"></i>Déconnexion
+                            </a>
+                        <?php } else{ ?>
+                            <a class="btn btn-warning btn-sm ml-3" href="authentification.php">
+                            <i class="fa fa-shopping-cart"></i>S'Identifier
+                            </a>          
+                        <?php } ?>
+                    </form>
+                </div>
+            </div>
+        </nav>
 
 <div class="text-center">
     <div class="container">
@@ -62,12 +68,10 @@
                     </thead>
                     <tbody>
                         <?php
-                            Article("Kebab","...","5.99");
-                            Article("Kebab","...","5.99");
-                            Article("Kebab","...","5.99");
-                            getSousTotal("32.99");
+                            cDatabase::getPanier();
+                            cDatabase::getSousTotal();
                             getLivraison("4.99");
-                            getTotal("36.99");
+                            cDatabase::getTotal();
                         ?>
                     </tbody>
                 </table>
@@ -76,7 +80,7 @@
 
         <div class="row">
             <div class="col-sm-12 col-md-11 text-left">
-                <button class="btn btn-lg btn-block btn-danger text-uppercase">Précédent</button>
+                <button class="btn btn-lg btn-block btn-danger text-uppercase" href="index.php">Précédent</button>
             </div>
             <div class="col-sm-12 col-md-1 text-right">
                 <button class="btn btn-lg btn-block btn-success text-uppercase">Suivant</button>
@@ -91,13 +95,16 @@
 </html>
 
 <?php
-function Article($name,$img,$price) {
+function Article($name,$img,$price,$Quantity) {
 ?>
 
     <tr>
+        <!--
         <td><img src="<?php echo $img; ?>" /> </td>
+        -->
+        <td><img src="<?php echo "..."; ?>" /> </td>
         <td><?php echo $name ?></td>
-        <td><input class="form-control" type="text" value="1" /></td>
+        <td><input class="form-control" type="text" value="<?php echo $Quantity ?>" /></td>
         <td class="text-right"><?php echo $price ?></td>
         <td class="text-right"><button class="btn btn-sm btn-danger">❌</button> </td>
     </tr>
@@ -144,6 +151,20 @@ function getTotal($price) {
         <td><strong>Total</strong></td>
         <td class="text-right"><strong><?php echo $price?> €</strong></td>
     </tr>
+<?php
+}
+?>
+
+<?php
+function getPanier($number,$price) {
+?>
+        <a class="btn btn-success btn-sm ml-3" href="panier.php">
+            <i class="fa fa-shopping-cart"></i>Panier
+            <span class="badge badge-light">|</span>
+            <span class="badge badge-light"><?php echo $number?></span>
+            <span class="badge badge-light">|</span>
+            <span class="badge badge-light"><?php echo $price?> €</span>
+        </a>
 <?php
 }
 ?>
