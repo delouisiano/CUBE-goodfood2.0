@@ -19,6 +19,17 @@ class RestarantDao {
         $result = mysqli_query(DB_LINK, $query) or die('Échec de la requête : ' . mysql_error());
         mysqli_close(DB_LINK);
     }
+
+    function GetById($Id) {
+
+        $query = "SELECT * FROM Restaurants WHERE ID = $Id;";
+        $result = mysqli_query(DB_LINK, $query) or die('Échec de la requête : ' . mysql_error());
+        while($row = mysqli_fetch_assoc($result)){
+            $ret = $row;
+        }
+
+        return $ret;
+    }
 }
 // CREATE TABLE Restaurants (ID int NOT NULL AUTO_INCREMENT, Name varchar(255), PRIMARY KEY (ID));
 ?>
