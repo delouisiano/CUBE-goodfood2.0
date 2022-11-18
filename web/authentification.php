@@ -132,7 +132,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 							</div>
 							<p class="text-danger"> <span id="erreurco" class="text-danger"></span></p>
 							<div class="form-group text-center">
-								<button type="submit" class="btn btn-primary ">Connexion</button>
+								<button type="submit" onclick="location.href='http:/index.php';" class="btn btn-primary ">Connexion</button>
 							</div>
 						</form>
 			    	</div>
