@@ -118,6 +118,8 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 
 			</div>
 		</body>
+		<!-- SCRIPT JS -->
+		<script src="js/index.js"></script>
 </html>
 
 <?php
@@ -142,7 +144,7 @@ function boisson($name,$img,$price) {
 ?>
 
 <?php
-function sandwich($name,$img,$price,$content,$vegetarien,$vegan) {
+function sandwich($id,$name,$img,$price,$content,$vegetarien,$vegan) {
 ?>
 
     <div class="col">
@@ -166,7 +168,7 @@ function sandwich($name,$img,$price,$content,$vegetarien,$vegan) {
        				}
        				?>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
-        			<button type="submit" class="btn btn-primary">Commander</button>
+        			<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>)" class="btn btn-primary">Commander</button>
         		</div>	
       		</div>
     	</div>
