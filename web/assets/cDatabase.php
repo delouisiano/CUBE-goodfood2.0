@@ -46,7 +46,7 @@ class cDatabase {
 
             if ($sandwich) {
                 forEach($sandwich as $value) {
-                    sandwich($value['title'], $value['picture'],$value['price'],"",$value['vegetarien'],$value['vegan']);
+                    sandwich($value['id'],$value['title'], $value['picture'],$value['price'],"",$value['vegetarien'],$value['vegan']);
                 }
             }
     }
@@ -67,14 +67,14 @@ class cDatabase {
 
     static function getpanier() {
         $bdd = self::connectDb();
-        $sql = " SELECT a.price,a.picture,a.title,p.id,p.quantite FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
+        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite FROM paniers p,articles a where a.id = p.id_article and p.id_user = " . $_SESSION['Compte']['id'] . " ";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($panier) {
             forEach($panier as $value) {
-                Article($value['title'],$value['picture'],$value['price'],$value['quantite']);
+                Article($value['id'],$value['title'],$value['picture'],$value['price'],$value['quantite']);
             }
         }
     }
