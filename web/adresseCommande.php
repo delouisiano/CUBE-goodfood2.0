@@ -12,72 +12,91 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="index.php">GOOD FOOD !!!</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">GOOD FOOD !!!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-                    <ul class="navbar-nav m-auto">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
 
-                        <li class="nav-item m-auto">
-                            <a class="nav-link" href="index.php">Carte</a>
-                        </li>
-                    </ul>
+                    <li class="nav-item m-auto">
+                        <a class="nav-link" href="index.php">Carte</a>
+                     </li>
+                </ul>
 
-                    <form class="form-inline my-2 my-lg-0">
-                        <?php 
-                        if (isset($_SESSION['Compte'])) { 
-                            cDatabase::getcardpanier();
-                            ?>
-                            <a class="btn btn-danger btn-sm ml-3" href="panier.php">
-                                <i class="fa fa-shopping-cart"></i>Déconnexion
-                            </a>
-                        <?php } else{ ?>
-                            <a class="btn btn-warning btn-sm ml-3" href="authentification.php">
+                <form class="form-inline my-2 my-lg-0">
+                    <?php 
+                    if (isset($_SESSION['Compte'])) { 
+                    cDatabase::getcardpanier();
+                    ?>
+                    <a class="btn btn-danger btn-sm ml-3" href="panier.php">
+                        <i class="fa fa-shopping-cart"></i>Déconnexion
+                    </a>
+                    <?php } else{ ?>
+                        <a class="btn btn-warning btn-sm ml-3" href="authentification.php">
                             <i class="fa fa-shopping-cart"></i>S'Identifier
-                            </a>          
-                        <?php } ?>
-                    </form>
-                </div>
+                        </a>          
+                    <?php } ?>
+                </form>
             </div>
-        </nav>
-
-<div class="text-center">
-    <div class="container">
-        <br>
-        <h1 class="">Adresse de livraison</h1>
-        <br>
-     </div>
-</div>
-
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive">
-
-                <table class="table table-striped">
-                    <tbody>
-                       <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                          <div class="card-header">Adresse N°1</div>
-                          <div class="card-body text-secondary">
-                            <p class="card-text">Adresse : 155 rues des Lilas</p>
-                            <p class="card-text">Ville : Bruay-La-Buissière</p>
-                            <p class="card-text">Code Postal : 62700</p>
-                            
-                          </div>
-                        </div>
-                    </tbody>
-                </table>
-            </div>   
         </div>
-    </div>
-</div>
+    </nav>
+    
 
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+
+			<div class="accordion-item">
+		    	<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+		    		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+		        		Adresse
+		      		</button>
+		    	</h2>
+		    	<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+		      		<div class="accordion-body">
+
+                        <div class="container text-center">
+                            <br>
+                            <h1 class="">Adresse de livraison</h1>
+                             <br>
+                        </div>
+
+                        <div class="container mb-4">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <?php
+                                cDatabase::getAdressUser();
+                                ?>                   
+                            </div>   
+                        </div>
+
+		      		</div>
+		    	</div>
+		  	</div>
+
+			<div class="accordion-item">
+
+		    	<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+		    		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+		        	Paiment
+		      		</button>
+		    	</h2>
+			</div>
+
+			    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+			     	<div class="accordion-body">
+                     <div class="container text-center">
+                        <button type="button" onclick = "getAdressUser()" class="btn btn-success">Valider</button>              
+                    </div>
+			  	   	</div>
+			  	</div>
+
+			</div>
 
 </body>
+<!-- SCRIPT JS -->
+<script src="js/adressecommande.js"></script>
 </html>
 
 <?php
@@ -147,6 +166,31 @@ function getPanier($number,$price) {
             <span class="badge badge-light">|</span>
             <span class="badge badge-light"><?php echo $price?> €</span>
         </a>
+<?php
+}
+?>
+
+<?php 
+function getAdresse($id,$title,$adress,$city,$zippedcode){
+?>
+<div class="col-1">
+
+    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+
+        <div class="card-header">
+            <?php echo($title); ?>
+            <input class="form-check-input" type="checkbox" style="float:right;" value="<?php echo($id); ?>" id="flexCheckDefault">
+        </div>
+        
+        <div class="card-body text-secondary">
+        <p class="card-text">Adresse : <?php echo($adress); ?></p>
+        <p class="card-text">Ville : <?php echo($city); ?></p>
+        <p class="card-text">Code Postal : <?php echo($zippedcode); ?></p>    
+        </div>
+
+    </div>
+
+</div>
 <?php
 }
 ?>

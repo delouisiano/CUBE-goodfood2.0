@@ -123,7 +123,7 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 </html>
 
 <?php
-function boisson($name,$img,$price) {
+function boisson($name,$img,$price,$id) {
 ?>
 
     <div class="col">
@@ -133,7 +133,7 @@ function boisson($name,$img,$price) {
       			<div class="text-center">
         			<h5 class="card-title"><?php echo $name ?></h5>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
-					<button type="submit" class="btn btn-primary">Commander</button>
+					<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>)" class="btn btn-primary">Commander</button>
         		</div>
       		</div>
     	</div>

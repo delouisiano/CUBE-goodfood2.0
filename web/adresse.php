@@ -69,6 +69,12 @@ require_once(__DIR__ . '\assets\cDatabase.php');
                             
                           </div>
                         </div>
+
+                        <?php
+                        echo('blabla');
+                            getAdresse("1","Adresse N°1","155 rues des Lilas","Bruay-La-Buissière","62700");
+                        ?>
+
                     </tbody>
                 </table>
             </div>   
@@ -147,6 +153,25 @@ function getPanier($number,$price) {
             <span class="badge badge-light">|</span>
             <span class="badge badge-light"><?php echo $price?> €</span>
         </a>
+<?php
+}
+?>
+
+
+<?php 
+function getAdresse($id,$title,$adress,$city,$zippedcode){
+?>
+
+<div class="card border-secondary mb-3" style="max-width: 18rem;">
+
+    <div class="card-header">Adresse N°1</div>
+    <div class="card-body text-secondary">
+    <p class="card-text">Adresse : 155 rues des Lilas</p>
+    <p class="card-text">Ville : Bruay-La-Buissière</p>
+    <p class="card-text">Code Postal : 62700</p>    
+
+</div>
+
 <?php
 }
 ?>
