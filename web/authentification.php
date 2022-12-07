@@ -132,7 +132,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 							</div>
 							<p class="text-danger"> <span id="erreurco" class="text-danger"></span></p>
 							<div class="form-group text-center">
-								<button type="submit" class="btn btn-primary ">Connexion</button>
+								<button type="submit" onclick="redirection('selectionSite.php')" class="btn btn-primary ">Connexion</button>
 							</div>
 						</form>
 			    	</div>
@@ -142,6 +142,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 	</body>
 	<!-- SCRIPT JS -->
 	<script src="js/app.js"></script>
+	<script src="js/global.js"></script>
 </html>​
 
 <?php

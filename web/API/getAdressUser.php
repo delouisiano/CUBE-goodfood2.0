@@ -4,11 +4,11 @@
   
   $id = $_SESSION['Compte']['id'];
   
-  $sql = "INSERT INTO `commandes` (`id`, `id_site`, `id_user`, `date`,`id_adresse`) VALUES (NULL, '1', ".$_POST['id_adress'].",NOW(),".$_SESSION['Compte']['id']."); ";
+  $sql = "INSERT INTO `commandes` (`id`, `id_site`, `id_adresse`, `date`,`id_user`) VALUES (NULL, '".$_SESSION['site']['id_site']."', ".$_POST['id_adress'].",NOW(),".$_SESSION['Compte']['id']."); ";
   $result = $bdd->query($sql);
   $id_cde =$bdd->lastInsertId();
 
-  $sql = "SELECT * FROM lignes_paniers where id_panier = 14";
+  $sql = "SELECT * FROM lignes_paniers where id_panier = '".$_SESSION['panier']['id']."'";
   $result2 = $bdd->query($sql);
   $lignes = $result2->fetchAll(PDO::FETCH_ASSOC);
 
@@ -21,7 +21,7 @@
 
     }
 
-    $sql = "delete from `lignes_paniers` where id_panier = 14 ;";
+    $sql = "delete from `lignes_paniers` where id_panier = '".$_SESSION['panier']['id']."' ;";
     $result = $bdd->query($sql);
 
   } 

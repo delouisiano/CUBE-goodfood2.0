@@ -24,7 +24,7 @@ class cDatabase {
 
     static function getBoisson() {
          $bdd = self::connectDb();
-            $sql = "SELECT * FROM `articles` where category = 0 ";
+            $sql = "SELECT * FROM `articles` where category = 0 and id_site=".$_SESSION['site']['id_site'].";";
 
             $result = $bdd->query($sql);
             $articles = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@ class cDatabase {
 
     static function getSandwich() {
         $bdd = self::connectDb();
-            $sql = " SELECT * FROM `articles` where category = 1 ";
+            $sql = " SELECT * FROM `articles` where category = 1 and id_site=".$_SESSION['site']['id_site']."; ";
 
             $result = $bdd->query($sql);
             $sandwich = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@ class cDatabase {
 
     static function getmenu() {
         $bdd = self::connectDb();
-        $sql = " SELECT * FROM `articles` where category = 2 ";
+        $sql = " SELECT * FROM `articles` where category = 2 and id_site=".$_SESSION['site']['id_site'].";";
 
         $result = $bdd->query($sql);
         $menu = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -67,7 +67,7 @@ class cDatabase {
 
     static function getpanier() {
         $bdd = self::connectDb();
-        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = 14 ";
+        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -95,7 +95,7 @@ class cDatabase {
 
     static function getSousTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = 14 ";
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -109,7 +109,7 @@ class cDatabase {
 
     static function getTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = 14 ";
+        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -194,7 +194,7 @@ class cDatabase {
     static function getcardpanier() {
         $bdd = self::connectDb();
 
-        $sql = "SELECT `id` FROM `paniers` where id_site = 1 and id_user = ".$_SESSION['Compte']['id'].";";
+        $sql = "SELECT `id` FROM `paniers` where id_site = ".$_SESSION['site']['id_site']." and id_user = ".$_SESSION['Compte']['id'].";";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -209,7 +209,16 @@ class cDatabase {
 
         if ($panier) {
             forEach($panier as $value) {
-                getPanier($value['quantite'],$value['tt']);
+                $qt = $value['quantite'];
+                $tt = $value['tt'];
+                if($qt==""){
+                    $qt="0";
+                }
+                if($tt==""){
+                    $tt="0.00";
+                }
+                
+                getPanier($qt,$tt);
             }
         } 
         } 
@@ -227,6 +236,20 @@ class cDatabase {
 
                 getAdresse($value['id_adresse'],$value['nom'],$value['rue'],$value['ville'],$value['cp']);
 
+            }
+        } 
+    }
+
+    static function getSites() {
+        $bdd = self::connectDb();
+        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites;";
+
+        $result = $bdd->query($sql);
+        $sites = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($sites) {
+            forEach($sites as $value) {
+                sites($value['nom'],$value['image'],$value['description'],$value['id_site']);
             }
         } 
     }

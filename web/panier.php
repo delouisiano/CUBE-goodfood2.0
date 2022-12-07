@@ -96,6 +96,7 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 	</body>
     <!-- SCRIPT JS -->
 		<script src="js/panier.js"></script>
+        <script src="js/global.js"></script>
 </html>
 
 <?php
@@ -103,14 +104,14 @@ function Article($id,$name,$img,$price,$Quantity) {
 ?>
 
     <tr>
-        <!--
-        <td><img src="<?php echo $img; ?>" /> </td>
-        -->
-        <td><img src="<?php echo "..."; ?>" /> </td>
+        
+        <td><img src="<?php echo $img; ?>" style="width:100px;height:100px;" /> </td>
+        
+
         <td><?php echo $name ?></td>
-        <td><input class="form-control" type="text" value="<?php echo $Quantity ?>" /></td>
+        <td ><input class="form-control text-center" type="text"  value="<?php echo $Quantity ?>" /></td>
         <td class="text-right"><?php echo $price ?></td>
-        <td class="text-right"><button class="btn btn-sm btn-danger" onclick="supprArticlePanier(<?php  echo $id  ?>)" value="<?php echo $id ?>">❌</button> </td>
+        <td class="text-right"><button class="btn btn-sm btn-danger" onclick="supprArticlePanier(<?php  echo $id  ?>);" value="<?php echo $id ?>">❌</button> </td>
     </tr>
 
 <?php

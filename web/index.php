@@ -18,7 +18,6 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		    <div class="container">
 		        <a class="navbar-brand" href="index.php">GOOD FOOD !!!</a>
