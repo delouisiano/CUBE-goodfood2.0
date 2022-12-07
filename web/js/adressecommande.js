@@ -23,8 +23,7 @@ function getAdressUser(){
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				res = this.response;
-				console.log(res);
-				alert("commande validée")
+				location.href='http:/commande.php';
 			} else if (this.readyState == 4) {
 				alert("Une erreur est survenue...");
 			}
@@ -32,7 +31,7 @@ function getAdressUser(){
 	
 		}
 		else{
-			let mes = "veuillez séléctioné une adresse de livraison"
+			let mes = "veuillez séléctioné une adresse de livraison..."
 			console.log(mes)
 		}
 
