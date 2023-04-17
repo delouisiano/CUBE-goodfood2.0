@@ -60,6 +60,13 @@ $_SESSION['panier']=null;
                              <br>
                         </div>
 
+                        <div class="text-center input-group mb-3" style ="max-width:500px;" >
+                            <input type="text" class="form-control" id="ville" placeholder="Ville" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" onclick="getsitebycity()" type="button">Valider</button>
+                            </div>
+                        </div>
+
                         <div class="container mb-4">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
 

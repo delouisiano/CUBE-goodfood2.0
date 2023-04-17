@@ -1,3 +1,16 @@
+function getsitebycity(city){
+
+	let ville = document.querySelector('#ville').value
+	console.log(ville);
+
+}
+
+
+
+
+
+
+
 function getsite(id){
 
 	if(id){
@@ -27,10 +40,5 @@ function getsite(id){
 		};
 	
 	}
-
 return false;	
-
 }
-
-	
-
