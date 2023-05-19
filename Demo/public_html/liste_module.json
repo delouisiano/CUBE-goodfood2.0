@@ -1,0 +1,24 @@
+{
+  "list": [
+    {
+      "ListingID": 0,
+      "Title": "Modules"
+    },
+    {
+      "ListingID": 1,
+      "Title": "Accueil"
+    },
+    {
+      "ListingID": 2,
+      "Title": "Réservations"
+    },
+    {
+      "ListingID": 3,
+      "Title": "Images"
+    },
+    {
+      "ListingID": 4,
+      "Title": "Paramétrages"
+    }
+  ]
+}

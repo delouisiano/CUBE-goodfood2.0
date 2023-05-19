@@ -168,7 +168,48 @@ function sandwich($id,$name,$img,$price,$content,$vegetarien,$vegan) {
        				?>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
         			<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>)" class="btn btn-primary">Commander</button>
-        		</div>	
+        		
+					<button type="button" class="btn btn-primary" onclick="getPrixArt(<?php echo $id?>);getCompositionArt(<?php echo $id?>);getSupplementsArt(<?php echo $id?>);" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						Séléction De La Composition
+					</button>
+
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Séléction De La Compostion</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+
+								<div class="modal-body">
+
+									<h4>Composants</h4>
+									<div id="div_composants">
+									
+									</div>
+
+									<BR>
+
+									<h4>Suppléments</h4>
+									<div id="div_supplements">
+										
+									</div>
+
+									<BR>
+
+									<h4>Prix :</h4>
+									<h4 id="prix"></h4>
+
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+									<button type="button" class="btn btn-primary">Ajouter Au Panier</button>
+								</div>
+							</div>
+						</div>
+						</div>
+				</div>	
       		</div>
     	</div>
  	</div>

@@ -1,8 +1,33 @@
-function getsitebycity(city){
+function getsitebycity(){
 
 	let ville = document.querySelector('#ville').value
 	console.log(ville);
 
+        var xhr = new XMLHttpRequest();
+	    var res;
+	
+		//SÉLECTION DU FICHIER DE L'API
+		xhr.open("POST", "assets/cDatabase.php" + "?funcname=cDatabase::affSite&ville='"+ville+"'", true);
+
+		//Force le type de réponse en JSON
+		xhr.responseType = "json";
+
+		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+		xhr.send();
+		
+		xhr.onreadystatechange = function() {
+			console.log('aaaa')
+			if (this.readyState == 4 && this.status == 200) {
+				console.log('bbbb')
+				//res = this.response;
+				//redirection('selectionSite.php');				
+			} else if (this.readyState == 4) {
+				alert("Une erreur est survenue...");
+			}
+		};
+	return false;
 }
 
 

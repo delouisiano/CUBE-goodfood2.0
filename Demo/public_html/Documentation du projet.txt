@@ -1,0 +1,26 @@
+----------------------------------
+Projet Gestion des Demandes
+----------------------------------
+
+	----------------------------------
+	Lien
+	----------------------------------
+		Site 	: https://jdut.eu/
+		MySQL :https://auth-db511.hstgr.io/index.php?db=u212966396_gestiondemande
+	----------------------------------
+
+	----------------------------------
+	Connexion MySQL
+	----------------------------------
+		Utilisatateur : 	u212966396_root2
+		Mot de passe : 	Urkqsrk1
+	----------------------------------
+
+	----------------------------------
+	Connectivités Base de données
+	----------------------------------
+		Host/Server :	sql511.main-hosting.eu
+		Nom de la base : 	u212966396_gestiondemande
+		User : 		u212966396_root2
+		Password :		Urkqsrk1
+	----------------------------------

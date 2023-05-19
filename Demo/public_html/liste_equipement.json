@@ -1,0 +1,32 @@
+{
+  "list": [
+    {
+      "ListingID": 0,
+      "Title": "Équipements"
+    },
+    {
+      "ListingID": 1,
+      "Title": "Borne 1"
+    },
+    {
+      "ListingID": 2,
+      "Title": "Bornes 2"
+    },
+    {
+      "ListingID": 3,
+      "Title": "Bornes 3"
+    },
+    {
+      "ListingID": 4,
+      "Title": "Totem 1"
+    },
+    {
+      "ListingID": 5,
+      "Title": "Totem 2"
+    },
+    {
+      "ListingID": 6,
+      "Title": "Totem 3"
+    }
+  ]
+}

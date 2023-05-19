@@ -4,6 +4,24 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+//var_dump($_GET);
+/*
+if (isset($_POST['funcname'])) {
+    $funcname = $_POST['funcname'];
+    unset($_POST['funcname']);
+    try {
+        http_response_code(200);
+        exit(json_encode($funcname($_POST)));
+    } catch (\exception $e) {
+        http_response_code(403);
+        $arr = explode('#', $e->getMessage());
+        if (@$arr[1])
+            exit(json_encode(array('code' => $arr[1], 'msg' => $arr[2])));
+        else
+            exit(json_encode(array('code'=>'99999', 'msg'=>$e->getMessage())));
+    }
+}
+*/
 class cDatabase {
 
     private static $host = "sql511.main-hosting.eu";
@@ -17,7 +35,6 @@ class cDatabase {
         } catch (PDOException $pe) {
             http_response_code(401);
             throw(json_encode(array('msg' => "Connexion à la base de données impossible",'code' => "0000")));
-            //die("Could not connect to the database " . $dbname . " : " . $pe->getMessage());
         }
         return $bdd;
     }
@@ -240,10 +257,13 @@ class cDatabase {
         } 
     }
 
-    static function getSites() {
-        $bdd = self::connectDb();
-        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites;";
 
+    static function affSite($data) {
+        var_dump($data);
+        $bdd = self::connectDb();
+        
+        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites where ville = '". $data['ville'] ."'";
+        echo($sql);
         $result = $bdd->query($sql);
         $sites = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -252,6 +272,24 @@ class cDatabase {
                 sites($value['nom'],$value['image'],$value['description'],$value['id_site']);
             }
         } 
+
     }
 
+
+    static function getSites() {
+
+        $bdd = self::connectDb();
+
+        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites;";
+                
+        $result = $bdd->query($sql);
+        $sites = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($sites) {
+            forEach($sites as $value) {
+                sites($value['nom'],$value['image'],$value['description'],$value['id_site']);
+            }
+        } 
+
+    }
 }

@@ -3,7 +3,7 @@ function getAdressUser(){
         var xhr = new XMLHttpRequest();
 	    var res;
 		//SÉLECTION DU FICHIER DE L'API
-		xhr.open("POST", "API/getAdressUser.php", true);
+		xhr.open("GET", "API/getAdressUser.php", true);
 
 		//Force le type de réponse en JSON
 		xhr.responseType = "json";

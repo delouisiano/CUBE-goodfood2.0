@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion Des Demandes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script type="text/javascript" src="dmxAppConnect/dmxAppConnect.js"></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxAnimateCSS/animate.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="dmxAppConnect/dmxAnimateCSS/dmxAnimateCSS.js" defer></script>
+  <script src="dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer></script>
+  <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+  <script src="dmxAppConnect/dmxBootstrap4Navigation/dmxBootstrap4Navigation.js" defer></script>
+</head>
+
+<body is="dmx-app">
+
+  <dmx-json-datasource id="json-datasource2" is="dmx-serverconnect" url="liste_client.json"></dmx-json-datasource>
+  <dmx-data-view id="data_view2" dmx-bind:data="jsondatasource2.data.list" filter=""></dmx-data-view>
+
+  <dmx-json-datasource id="json-datasource3" is="dmx-serverconnect" url="liste_equipement.json"></dmx-json-datasource>
+  <dmx-data-view id="data_view3" dmx-bind:data="jsondatasource3.data.list" filter=""></dmx-data-view>
+
+  <dmx-json-datasource id="json-datasource4" is="dmx-serverconnect" url="liste_module.json"></dmx-json-datasource>
+  <dmx-data-view id="data_view4" dmx-bind:data="jsondatasource4.data.list" filter=""></dmx-data-view>
+
+  <dmx-json-datasource id="json-datasource5" is="dmx-serverconnect" url="liste_logiciel.json"></dmx-json-datasource>
+  <dmx-data-view id="data_view5" dmx-bind:data="jsondatasource5.data.list" filter=""></dmx-data-view>
+
+  <dmx-json-datasource id="json-datasource6" is="dmx-serverconnect" url="liste_demande.json"></dmx-json-datasource>
+  <dmx-data-view id="data_view6" dmx-bind:data="jsondatasource6.data.list" filter=""></dmx-data-view>
+
+  <header class="bg-dark text-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand mr-auto ml-auto" href="index.html">Gestion Des Demandes</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1_collapse" aria-controls="navbar1_collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbar2_collapse">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active text-xl-right"></a>
+              </div>
+            </div>
+            <div class="collapse navbar-collapse justify-content-center" id="navbar3_collapse">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active text-xl-right" href="index.html">Accueil</a>
+              </div>
+            </div>
+            <div class="collapse navbar-collapse justify-content-center justify-content-xl-end" id="navbar4_collapse">
+              <div class="navbar-nav">
+                <button type="submit" class="btn btn-danger">Déconnexion</button>
+
+
+
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="pt-4">
+
+    <div class="container">
+
+      <div class="col-12 col-md-8 col-lg-NaN">
+
+        <div class="row">
+
+          <div class="col-6">
+            <select id="Clients" selected="" class="custom-select" is="dmx-repeat" id="repeat1" dmx-bind:repeat="data_view2.data" key="ListingID">
+              <option value="1" dmx-text="Title"></option>
+            </select>
+          </div>
+
+          <div class="col-6">
+            <select id="Bornes" selected="" class="custom-select" is="dmx-repeat" id="repeat1" dmx-bind:repeat="data_view3.data" key="ListingID">
+              <option value="1" dmx-text="Title"></option>
+            </select>
+          </div>
+
+        </div>
+
+        <div>
+          <BR>
+        </div>
+
+        <div class="row">
+
+          <div class="col-6">
+            <select id="Logiciels" selected="" class="custom-select" is="dmx-repeat" id="repeat1" dmx-bind:repeat="data_view5.data" key="ListingID">
+              <option value="1" dmx-text="Title"></option>
+            </select>
+          </div>
+
+          <div class="col-6">
+            <select id="Modules" selected="" class="custom-select" is="dmx-repeat" id="repeat1" dmx-bind:repeat="data_view4.data" key="ListingID">
+              <option value="1" dmx-text="Title"></option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <BR>
+  </section>
+
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Client</th>
+            <th class="text-center" scope="col">Logiciel</th>
+            <th class="text-center" scope="col">Module</th>
+            <th class="text-center" scope="col">Demande</th>
+            <th class="text-center" scope="col">Date</th>
+            <th class="text-center" scope="col">Statut</th>
+            <th class="text-center" scope="col">Le</th>
+            <th class="text-center" scope="col">Commentaire</th>
+            <th class="text-center" scope="col">Modifier</th>
+          </tr>
+        </thead>
+        <tbody is="dmx-repeat" id="repeat2" dmx-bind:repeat="data_view6.data" key="id_demande">
+          <tr>
+
+            <td class="text-center" dmx-text="nom"></td>
+            <td class="text-center" dmx-text="logiciel"></td>
+            <td class="text-center" dmx-text="module"></td>
+            <td class="text-center" dmx-text="demande_txt"></td>
+            <td class="text-center" dmx-text="date"></td>
+            <td class="text-center" dmx-text="statut"></td>
+            <td class="text-center" dmx-text="date_fin"></td>
+            <td class="text-center" dmx-text="commentaire_txt"></td>
+            <td class="text-center"><button type="submit" class="btn btn-warning">✔</button></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-secondary fixed-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p class="text-secondary text-center small mb-0 p-1">Bas de Page</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>
