@@ -3,6 +3,8 @@
   $bdd = new PDO('mysql:host=' . "sql511.main-hosting.eu" . ";dbname=" . "u212966396_db_test" . ";charset=utf8mb4", "u212966396_root" , "Urkqsrk1");
   
   $id = $_POST['id_site'];
+
+  var_dump($_SESSION);
   
   $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites where id_site=".$id.";";
   $result1 = $bdd->query($sql);
@@ -11,6 +13,7 @@
   if ($site) {
     $_SESSION['site']=$site[0];
     selectpanier($bdd);
+    var_dump($_SESSION['panier']);
   } 
 
   function selectpanier($bdd){

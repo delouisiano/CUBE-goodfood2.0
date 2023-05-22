@@ -167,8 +167,7 @@ function sandwich($id,$name,$img,$price,$content,$vegetarien,$vegan) {
        				}
        				?>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
-        			<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>)" class="btn btn-primary">Commander</button>
-        		
+        			        		
 					<button type="button" class="btn btn-primary" onclick="getPrixArt(<?php echo $id?>);getCompositionArt(<?php echo $id?>);getSupplementsArt(<?php echo $id?>);" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						Séléction De La Composition
 					</button>
@@ -201,7 +200,7 @@ function sandwich($id,$name,$img,$price,$content,$vegetarien,$vegan) {
 
 									<div class="modal-footer">
 										<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-										<button type="button" onclick="addCompositionPanier()" class="btn btn-primary">Ajouter Au Panier</button>
+										<button type="button" data-bs-dismiss="modal" onclick="addCompositionPanier();majcardpanier();" class="btn btn-primary">Ajouter Au Panier</button>
 									</div>
 								</div>
 							</div>
@@ -242,9 +241,9 @@ function getPanier($number,$price) {
         <a class="btn btn-success btn-sm ml-3" href="panier.php">
             <i class="fa fa-shopping-cart"></i>Panier
             <span class="badge badge-light">|</span>
-            <span class="badge badge-light"><?php echo $number?></span>
+            <span class="badge badge-light" id="qt_panier"><?php echo $number?></span>
             <span class="badge badge-light">|</span>
-            <span class="badge badge-light"><?php echo $price?> €</span>
+            <span class="badge badge-light" id="prix_panier"><?php echo $price?> €</span>
         </a>
 <?php
 }

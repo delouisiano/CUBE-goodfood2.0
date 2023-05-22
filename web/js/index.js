@@ -34,6 +34,8 @@ if(id>0){
 	var xhr = new XMLHttpRequest();
 	var res;
 
+	console.log("blibli")
+
 	xhr.open("POST", "API/getCompositionArt.php", true);
 
 	xhr.responseType = "json";
@@ -131,7 +133,7 @@ function getSupplementsArt(id){
 	
 }
 
-async function getPrixArt(id){
+function getPrixArt(id){
 
 	if(id>0){
 		var xhr = new XMLHttpRequest();
@@ -223,8 +225,6 @@ function addCompositionPanier(){
 	console.log("table supp : "+table_supp)
 	console.log("id_art : "+id_art)
 	
-
-
     var xhr = new XMLHttpRequest();
 	var res;
 	//SÉLECTION DU FICHIER DE L'API
@@ -243,6 +243,47 @@ function addCompositionPanier(){
 		if (this.readyState == 4 && this.status == 200) {
 			res = this.response;
 			console.log(res)
+		} else if (this.readyState == 4) {
+			alert("Une erreur est survenue...");
+		}
+	};
+
+	
+	return false;
+
+}
+
+function majcardpanier(){
+	console.log("majpanier")
+
+
+	var xhr = new XMLHttpRequest();
+	var res;
+	//SÉLECTION DU FICHIER DE L'API
+	xhr.open("POST", "API/getcardpanier.php", true);
+
+	//Force le type de réponse en JSON
+	xhr.responseType = "json";
+
+	//ENTETE DE LA REQUETE (EVITER PB CORPS) 
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+	//EVOIE DES DONNÉES
+	xhr.send();
+		
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			res = this.response;
+			console.log(res)
+			let qt = res[0]
+			let prix =res[1]
+
+			console.log(qt)
+			console.log(prix)
+
+			document.querySelector('#prix_panier').innerHTML = prix+" €";
+			document.querySelector('#qt_panier').innerHTML = qt;
+
 		} else if (this.readyState == 4) {
 			alert("Une erreur est survenue...");
 		}

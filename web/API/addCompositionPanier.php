@@ -22,23 +22,31 @@
     $result = $bdd->query($sql);
   }
 
-  selectpanier($bdd);
+  $prix = 0;
+  $prix_tt_supp = 0;
 
-  function selectpanier($bdd){
-    $sql = "SELECT id from paniers where id_user=95 and id_site=1;";
-    $result2 = $bdd->query($sql);
-    $panier = $result2->fetchAll(PDO::FETCH_ASSOC);
-    if ($panier) {
-      $_SESSION['panier']=$panier[0];
-    }
-    else{
-      $sql = "insert into paniers (id_user,id_site) value (95,1);";
-      $result3 = $bdd->query($sql);
-      selectpanier($bdd);
-    }
+  var_dump($table_supp);
+  echo(empty($table_supp));
+
+  if($table_supp[0] != ""){
+
+    $sql="SELECT sum(prix) FROM `declinaisons` where id_declinaisons IN(".$_POST['table_supp'].");";
+    $result = $bdd->query($sql);
+    $tt_supp = $result->fetch(PDO::FETCH_ASSOC);
+    $prix_tt_supp = $tt_supp['sum(prix)'];
+
   }
 
-  $sql = "INSERT INTO `lignes_paniers`(`id_panier`, `id_composition`, `quantite`, `type`) VALUES (".$_SESSION['panier']['id'].",".$id_compo.",1,1)";
+  $sql="SELECT price FROM `articles` where id =".$_POST['id_art'];
+  $result = $bdd->query($sql);
+  $res = $result->fetch(PDO::FETCH_ASSOC);
+  var_dump($res);
+  $prix_art = $res['price'];
+
+  $prix = $prix_tt_supp + $prix_art;
+  echo("prix compo : ".$prix);
+
+  $sql = "INSERT INTO `lignes_paniers`(`id_panier`,`id_article`, `id_composition`,`prix`, `quantite`, `type`) VALUES (".$_SESSION['panier']['id'].",".$_POST['id_art'].",".$id_compo.",".$prix.",1,1)";
   $result = $bdd->query($sql);
 
 ?>

@@ -219,7 +219,7 @@ class cDatabase {
         if ($panier) {
           $id_panier = $panier['0']['id'];
           
-        $sql = "select distinct 1,(SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$id_panier.") as tt ,(SELECT sum(p.quantite) as qt FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$id_panier." ) as quantite from paniers; ";
+        $sql = "SELECT (select sum(prix*quantite) from lignes_paniers where id_panier =".$_SESSION['panier']['id']." ) as tt,(select sum(quantite) from lignes_paniers where id_panier =".$_SESSION['panier']['id']." ) as quantite;";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -228,6 +228,7 @@ class cDatabase {
             forEach($panier as $value) {
                 $qt = $value['quantite'];
                 $tt = $value['tt'];
+
                 if($qt==""){
                     $qt="0";
                 }

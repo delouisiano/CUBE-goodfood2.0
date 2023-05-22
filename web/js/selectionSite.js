@@ -20,9 +20,7 @@ function getsitebycity(){
 		xhr.onreadystatechange = function() {
 			console.log('aaaa')
 			if (this.readyState == 4 && this.status == 200) {
-				console.log('bbbb')
-				//res = this.response;
-				//redirection('selectionSite.php');				
+
 			} else if (this.readyState == 4) {
 				alert("Une erreur est survenue...");
 			}
@@ -30,19 +28,13 @@ function getsitebycity(){
 	return false;
 }
 
-
-
-
-
-
-
 function getsite(id){
 
 	if(id){
-        var xhr = new XMLHttpRequest();
+        
+		var xhr = new XMLHttpRequest();
 	    var res;
 		
-
 		//SÉLECTION DU FICHIER DE L'API
 		xhr.open("POST", "API/getSite.php", true);
 
@@ -52,7 +44,6 @@ function getsite(id){
 		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		
-	
 		xhr.send("id_site="+id);
 		
 		xhr.onreadystatechange = function() {
@@ -65,5 +56,7 @@ function getsite(id){
 		};
 	
 	}
-return false;	
+
+	return false;	
+
 }
