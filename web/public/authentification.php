@@ -124,7 +124,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 						<form id="connexion">
 							<h5 class="text-center">CONNEXION</h5><BR>
 							<div class="form-group">
-								<input type="email" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
+								<input type="text" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
 							</div>
 
 							<div class="form-group">
