@@ -249,7 +249,34 @@ function menu($name,$img,$price,$content) {
 	   			<div class="text-center">
 	       			<h5 class="card-title"><?php echo $name ?></h5>
 	       			<p class="card-text">Prix : <?php echo $price ?> €</p>
-	       			<button type="submit" class="btn btn-primary">Commander</button>
+	       			<button type="button" class="btn btn-primary" onclick="" data-bs-toggle="modal" data-bs-target="#Modal_menu">
+						Composer Le Menu
+					</button>
+
+						<div class="modal fade" id="Modal_menu" tabindex="-1" aria-labelledby="ModalMenu" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									
+									<div class="modal-header">
+										<h5 class="modal-title" id="ModalMenu">Séléction Du Menu</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+
+									<div class="modal-body">
+
+										<h4>Prix :</h4>
+										<h4 id_menu="" id="prix_menu"></h4>
+
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+										<button type="button" data-bs-dismiss="modal" onclick="" class="btn btn-primary">Ajouter Au Panier</button>
+									</div>
+
+								</div>
+							</div>
+						</div>
 	       		</div>
 	   		</div>
 		</div>
