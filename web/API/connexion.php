@@ -11,7 +11,7 @@ $sql = "SELECT id,pseudo,mail,langue,type FROM `users` where mail = '" . $_POST[
      	$_SESSION['Compte'] = $compte;
     	//var_dump($_SESSION['Compte']);
 	  	header("Location: http://jdut/index.php");
-		//die();
+
 	  	Exit();
     }
 
