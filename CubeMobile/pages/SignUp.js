@@ -48,7 +48,7 @@ const SignUp = ({ navigation }) => {
                 secureTextEntry
             />
             <Button title="Sign Up" onPress={handleSignUp} />
-            <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
+            <Button title="Go to Login" onPress={() => navigation.navigate('SignIn')} />
         </View>
     );
 };

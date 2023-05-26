@@ -1,90 +1,41 @@
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // Define an array of card data
-const cards = [
-    {
-        title: 'Card 1',
-        image: require('../assets/card1.png'),
-        description: 'Ca fait',
-        button: 'buy',
-    },
-    {
-        title: 'Card 2',
-        image: require('../assets/card2.png'),
-        description: 'beaucoup',
-        button: 'buy',
-    },
-    {
-        title: 'Card 3',
-        image: require('../assets/card3.png'),
-        description: 'la',
-        button: 'buy',
-    },
-    {
-        title: 'Card 4',
-        image: require('../assets/card4.png'),
-        description: 'non',
-        button: 'buy',
-    },
-    {
-        title: 'Card 5',
-        image: require('../assets/card3.png'),
-        description: 'la',
-        button: 'buy',
-    },
-    {
-        title: 'Card 6',
-        image: require('../assets/card4.png'),
-        description: 'non',
-        button: 'buy',
-    },
-    {
-        title: 'Card 7',
-        image: require('../assets/card3.png'),
-        description: 'la',
-        button: 'buy',
-    },
-    {
-        title: 'Card 8',
-        image: require('../assets/card4.png'),
-        description: 'non',
-        button: 'buy',
-    },
-];
+const cards = [];
 
 // Define a component for each card
-const Card = ({ title, image, description, button }) => {
-
+const Card = ({ title, image, description, navigation }) => {
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.image} source={image} />
             <Text style={styles.description}>{description}</Text>
-            <Button style={styles.button} title={button} onPress={() => alert(button)} />
+            <Button style={styles.button} title="Commander" onPress={() => navigation.navigate('Restaurant')} />
         </View>
     );
 };
 
 // Define the main component that renders the cards in grid
-export default async function Home() {
-    var res;
-    try {
-        const response = await axios.post(
-            'http://apigoodfood/getSite.php',
-            { headers: { "Content-Type": "application/json" } }
-        );
-        console.log(response);
-        res = response;
-    } catch (error) {
-        console.log(error);
-    }
+export default function Home({ navigation }) {
+    const [cards, setCards] = useState([]);
 
+    useEffect(() => {
+        axios.get('http://api/getSites.php')
+            .then(function (response) {
+                var img = require("../assets/card1.png");
+                //var img = "../" + e.image;
+                const newCards = response.data.map(e => ({ title: e.nom, image: img, description: e.description }));
+                setCards(newCards);
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }, []);
     return (
         <View style={styles.content}>
             {cards.map((card) => (
-                <Card key={card.title} {...card} />
+                <Card key={card.title} {...card} navigation={navigation} />
             ))}
-
         </View>
     );
 };
