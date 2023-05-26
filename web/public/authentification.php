@@ -124,7 +124,7 @@ if (isset($_SESSION)){
 						<form id="connexion" novalidate>
 							<h5 class="text-center">CONNEXION</h5><BR>
 							<div class="form-group">
-								<input type="email" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
+								<input type="text" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
 							</div>
 
 							<div class="form-group">
