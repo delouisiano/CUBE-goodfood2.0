@@ -32,8 +32,8 @@ require_once(__DIR__ . '\assets\cDatabase.php');
                     if (isset($_SESSION['Compte'])) { 
                     cDatabase::getcardpanier();
                     ?>
-                    <a class="btn btn-danger btn-sm ml-3" href="authentification.php">
-			                	<i class="fa fa-shopping-cart"></i>Déconnexion
+                    <a class="btn btn-danger btn-sm ml-3" href="panier.php">
+                        <i class="fa fa-shopping-cart"></i>Déconnexion
                     </a>
                     <?php } else{ ?>
                         <a class="btn btn-warning btn-sm ml-3" href="authentification.php">

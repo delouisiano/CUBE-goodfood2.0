@@ -29,8 +29,8 @@ $_SESSION['panier']=null;
                     <?php 
                     if (isset($_SESSION['Compte'])) { 
                     ?>
-                    <a class="btn btn-danger btn-sm ml-3" href="authentification.php">
-			                	<i class="fa fa-shopping-cart"></i>Déconnexion
+                    <a class="btn btn-danger btn-sm ml-3" href="panier.php">
+                        <i class="fa fa-shopping-cart"></i>Déconnexion
                     </a>
                     <?php } else{ 
                         var_dump($_SESSION['Compte']);?>

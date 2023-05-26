@@ -54,44 +54,19 @@ document.getElementById("inscription").addEventListener("submit", function(e) {
 	if (err == "") {
 
 		//SÉLECTION DU FICHIER DE L'API
-		xhr.open("POST", "../API/inscription.php", true);
+		xhr.open("POST", "API/inscription.php", true);
 
 		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		//EVOIE DES DONNÉES
 		xhr.send("pseudo="+localStorage.getItem("pseudo")+"&mdp="+localStorage.getItem("mdp")+"&mdp2="+localStorage.getItem("mdp2")+"&mail="+localStorage.getItem("mail")+"&mail2="+localStorage.getItem("mail2")+"&Genre="+Genre+"&langue="+localStorage.getItem("langue"));
-
-		//Force le type de réponse en JSON
-		xhr.responseType = "json";
-			
-		xhr.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				res = this.response;
-				console.log(res);
-				switch(res){
-					case 2:
-						document.querySelector("#erreur").innerHTML = "Adresse mail déja utilisée";
-					break;
-						
-					case 1:
-						document.querySelector("#erreur").innerHTML = "Pseudo déja utilisé";
-					break;
-
-					case 0:
-						document.querySelector("#erreur").innerHTML = "ok";
-					break;
-				}
-			} 
-			else if (this.readyState == 4) {
-				alert("Une erreur est survenue...");
-			}
-		};
 	}
 	else{
 		//AFFICHAGE DE L'ERREUR SUR LA VUE
 		document.querySelector("#erreur").innerHTML = err;
 	}
+	//FONCTION DONC RETOUR (USELESS)
 	return false;
 });
 
@@ -122,7 +97,7 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
 	if (err == "") {
 	
 		//SÉLECTION DU FICHIER DE L'API
-		xhr.open("POST", "../API/connexion.php", true);
+		xhr.open("POST", "API/connexion.php", true);
 
 		//ENTETE DE LA REQUETE (EVITER PB CORPS) 
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -130,25 +105,6 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
 		//EVOIE DES DONNÉES
 		xhr.send("mail="+localStorage.getItem("mail")+"&mdp="+localStorage.getItem("mdp"));
 		//document.location.href="http://jdut/index.php"; 
-
-		//Force le type de réponse en JSON
-		xhr.responseType = "json";
-			
-		xhr.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				res = this.response;
-				console.log(res);
-				if(res == 0){
-					document.querySelector("#erreurco").innerHTML = "Mail ou mot de passe incorrect. Entrez le Mail et le mot de passe corrects et réessayez.";
-				}
-				else{
-					document.location.href="http://pfelast/public/index.php?";
-				}
-			} else if (this.readyState == 4) {
-				alert("Une erreur est survenue...");
-			}
-		};
-
 	}
 	else{
 		//AFFICHAGE DE L'ERREUR SUR LA VUE

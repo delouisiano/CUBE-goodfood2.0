@@ -4,9 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-echo __FILE__;
-if (!isset($_SESSION['panier']['id'])) { require_once('../API/getSite.php?id_site=1'); }
-
 //var_dump($_GET);
 /*
 if (isset($_POST['funcname'])) {
@@ -73,8 +70,8 @@ class cDatabase {
 
     static function getmenu() {
         $bdd = self::connectDb();
-        if (!isset($_SESSION['site']['id_site'])) $sql = " SELECT * FROM `articles` where category = 2 and id_site='1';";
-        else $sql = " SELECT * FROM `articles` where category = 2 and id_site=".$_SESSION['site']['id_site'].";";
+        $sql = " SELECT * FROM `articles` where category = 2 and id_site=".$_SESSION['site']['id_site'].";";
+
         $result = $bdd->query($sql);
         $menu = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -213,15 +210,15 @@ class cDatabase {
 
     static function getcardpanier() {
         $bdd = self::connectDb();
-        var_dump($_SESSION);
-        if (!isset($_SESSION['site']['id_site'])) $_SESSION['site']['id_site'] = 1;
-        $sql = "SELECT `id` FROM `paniers` where id_site = '".$_SESSION['site']['id_site']."' and id_user = '".$_SESSION['Compte']['id']."';";
+
+        $sql = "SELECT `id` FROM `paniers` where id_site = ".$_SESSION['site']['id_site']." and id_user = ".$_SESSION['Compte']['id'].";";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
       
         if ($panier) {
           $id_panier = $panier['0']['id'];
+          
         $sql = "SELECT (select sum(prix*quantite) from lignes_paniers where id_panier =".$_SESSION['panier']['id']." ) as tt,(select sum(quantite) from lignes_paniers where id_panier =".$_SESSION['panier']['id']." ) as quantite;";
 
         $result = $bdd->query($sql);
