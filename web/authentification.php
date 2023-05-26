@@ -3,14 +3,15 @@
 <?php
 session_start();
 
-session_destroy();
+if (isset($_SESSION)){
+	session_destroy();
+}
 
 ?>
 
 <html>
 
 	<head>
-
 		<meta charset="utf-8">
 		<title>Authentification</title>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -44,7 +45,7 @@ session_destroy();
 		  	<div class="col-sm-5">
 		    	<div class="card">
 		      		<div class="card-body">
-		      			<form id="inscription">
+		      			<form id="inscription" novalidate>
 		      				
 		      				<div class="align-self-center">
 						  		<h5 class="text-center ">INSCRIPTION</h5><BR>		
@@ -119,10 +120,10 @@ session_destroy();
 		 	<div class="col-sm-5">
 				<div class="card">
 			    	<div class="card-body">
-						<form id="connexion">
+						<form id="connexion" novalidate>
 							<h5 class="text-center">CONNEXION</h5><BR>
 							<div class="form-group">
-								<input type="email" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
+								<input type="text" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
 							</div>
 
 							<div class="form-group">
@@ -130,7 +131,7 @@ session_destroy();
 							</div>
 							<p class="text-danger"> <span id="erreurco" class="text-danger"></span></p>
 							<div class="form-group text-center">
-								<button type="submit" onclick="redirection('selectionSite.php')" class="btn btn-primary ">Connexion</button>
+								<button type="submit" class="btn btn-primary ">Connexion</button>
 							</div>
 						</form>
 			    	</div>
