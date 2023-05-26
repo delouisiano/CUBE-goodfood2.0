@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, AppState } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -12,6 +12,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const signOutTimer = useRef(null);
 
   useEffect(() => {
     // Retrieve the isLoggedIn value from AsyncStorage when the app is launched
@@ -45,16 +46,28 @@ const App = () => {
       // Handle error
     }
   };
+  const handleSignOut = async () => {
+    // handle SignOut logic here
+    setIsLoggedIn(false);
+    // Clear the isLoggedIn value from AsyncStorage
+    try {
+      await AsyncStorage.removeItem('isLoggedIn');
+    } catch (error) {
+      // Handle error
+    }
+  };
 
   const handleAppStateChange = async (nextAppState) => {
     if (nextAppState === 'background') {
-      // The app is being moved to the background (i.e. it's being closed)
-      // Set isLoggedIn to false and clear it from AsyncStorage
-      setIsLoggedIn(false);
-      try {
-        await AsyncStorage.removeItem('isLoggedIn');
-      } catch (error) {
-        // Handle error
+      // The app is being moved to the background
+      // Start a timer that will sign out the user after 5 minutes
+      signOutTimer.current = setTimeout(handleSignOut, 60);
+    } else if (nextAppState === 'active') {
+      // The app is being moved to the foreground
+      // Cancel the sign-out timer if it's running
+      if (signOutTimer.current) {
+        clearTimeout(signOutTimer.current);
+        signOutTimer.current = null;
       }
     }
   };
