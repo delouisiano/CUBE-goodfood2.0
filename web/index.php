@@ -128,7 +128,7 @@ function boisson($name,$img,$price,$id) {
       			<div class="text-center">
         			<h5 class="card-title"><?php echo $name ?></h5>
         			<p class="card-text">Prix : <?php echo $price ?> €</p>
-					<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>)" class="btn btn-primary">Commander</button>
+					<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>);majcardpanier();" class="btn btn-primary">Commander</button>
         		</div>
       		</div>
     	</div>
