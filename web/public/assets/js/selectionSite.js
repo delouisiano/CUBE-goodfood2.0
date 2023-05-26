@@ -34,7 +34,7 @@ function getsite(id){
         
 		var xhr = new XMLHttpRequest();
 	    var res;
-		
+
 		//SÉLECTION DU FICHIER DE L'API
 		xhr.open("POST", "API/getSite.php", true);
 

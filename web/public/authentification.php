@@ -3,8 +3,8 @@
 <?php
 session_start();
 
-if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
-	$_SESSION['Compte'] = null;
+if (isset($_SESSION)){
+	session_destroy();
 }
 
 ?>
@@ -46,7 +46,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 		  	<div class="col-sm-5">
 		    	<div class="card">
 		      		<div class="card-body">
-		      			<form id="inscription">
+		      			<form id="inscription" novalidate>
 		      				
 		      				<div class="align-self-center">
 						  		<h5 class="text-center ">INSCRIPTION</h5><BR>		
@@ -121,10 +121,10 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 		 	<div class="col-sm-5">
 				<div class="card">
 			    	<div class="card-body">
-						<form id="connexion">
+						<form id="connexion" novalidate>
 							<h5 class="text-center">CONNEXION</h5><BR>
 							<div class="form-group">
-								<input type="email" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
+								<input type="text" class="form-control" id="mailco" aria-describedby="emailHelp" placeholder="Adresse Mail">
 							</div>
 
 							<div class="form-group">
@@ -132,7 +132,7 @@ if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
 							</div>
 							<p class="text-danger"> <span id="erreurco" class="text-danger"></span></p>
 							<div class="form-group text-center">
-								<button type="submit" onclick="redirection('selectionSite.php')" class="btn btn-primary ">Connexion</button>
+								<button type="submit" class="btn btn-primary ">Connexion</button>
 							</div>
 						</form>
 			    	</div>
