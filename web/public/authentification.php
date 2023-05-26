@@ -12,7 +12,6 @@ if (isset($_SESSION)){
 <html>
 
 	<head>
-
 		<meta charset="utf-8">
 		<title>Authentification</title>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -141,8 +140,8 @@ if (isset($_SESSION)){
 		</div>
 	</body>
 	<!-- SCRIPT JS -->
-	<script src="js/app.js"></script>
-	<script src="js/global.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/global.js"></script>
 </html>​
 
 <?php
