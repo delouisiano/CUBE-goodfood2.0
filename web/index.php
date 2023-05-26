@@ -119,6 +119,26 @@ if(!isset($_SESSION['site']) || !isset($_SESSION['panier'])){
 			    	</div>
 			  	</div>
 
+				  <div class="accordion-item">
+   			  		<h2 class="accordion-header" id="panelsStayOpen-headingFour">
+	      				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+	       				Desserts
+	      				</button>
+    				</h2>
+    		  	</div>	
+
+				<div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+			      	<div class="accordion-body">
+				    	<div class="row row-cols-1 row-cols-md-3 g-4">
+
+							<?php
+								cDatabase::getDessert();
+							?>
+
+				  		</div>
+			    	</div>
+			  	</div>
+
 			</div>
 		</body>
 		<!-- SCRIPT JS -->
@@ -240,6 +260,45 @@ function menu($name,$img,$price,$content) {
 ?>
 
 <?php
+function dessert($id,$name,$img,$price,$content,$vegetarien,$vegan) {
+?>
+
+    <div class="col">
+    	<div class="card h-100">
+      		<img src= "<?php echo $img; ?>" class="card-img-top" alt="...">
+      		<div class="card-body">
+      			<div class="text-center">
+       				<h5 class="card-title"><?php echo $name ?></h5>
+       				<?php
+       				if($vegetarien == 1){
+       				?>
+       					<img src= "assets\vegan.jpg" class="img" alt="image" height="30" width="30">
+       				<?php
+       				}
+       				?>
+       				<?php
+       				if($vegan == 1){
+       				?>
+       					<img src= "assets\végétarien.jpg" class="img" alt="image" height="30" width="30">
+       				<?php
+       				}
+       				?>
+
+        			<div class="text-center">
+						<p class="card-text">Prix : <?php echo $price ?> €</p>
+						<button type="submit" value="<?php echo $id?>" onclick="addArticlePanier(<?php echo $id?>);majcardpanier();" class="btn btn-primary">Commander</button>
+        			</div>
+
+				</div>	
+      		</div>
+    	</div>
+ 	</div>
+
+<?php
+}
+?>
+
+<?php
 function getPanier($number,$price) {
 ?>
         <a class="btn btn-success btn-sm ml-3" href="panier.php">
@@ -252,3 +311,4 @@ function getPanier($number,$price) {
 <?php
 }
 ?>
+

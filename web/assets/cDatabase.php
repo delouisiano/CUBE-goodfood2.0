@@ -54,6 +54,22 @@ class cDatabase {
             }
     }
 
+    static function getDessert() {
+        $bdd = self::connectDb();
+           $sql = "SELECT * FROM `articles` where category = 3 and id_site=".$_SESSION['site']['id_site'].";";
+
+           $result = $bdd->query($sql);
+           $articles = $result->fetchAll(PDO::FETCH_ASSOC);
+
+           if ($articles) {
+               forEach($articles as $value) {
+                
+                   dessert($value['id'],$value['title'],$value['picture'],$value['price'],"",$value['vegetarien'],$value['vegan']);
+               }
+
+           }
+   }
+
     static function getSandwich() {
         $bdd = self::connectDb();
             $sql = " SELECT * FROM `articles` where category = 1 and id_site=".$_SESSION['site']['id_site']."; ";
