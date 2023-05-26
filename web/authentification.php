@@ -3,9 +3,7 @@
 <?php
 session_start();
 
-if ($_SESSION['Compte'] =! isset($_SESSION['Compte'])){
-	$_SESSION['Compte'] = null;
-}
+session_destroy();
 
 ?>
 

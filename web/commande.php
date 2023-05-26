@@ -30,9 +30,11 @@ require_once(__DIR__ . '\assets\cDatabase.php');
                     <form class="form-inline my-2 my-lg-0">
                         <?php 
                         if (isset($_SESSION['Compte'])) { 
-                            cDatabase::getcardpanier();
+                            if (isset($_SESSION['site']))
+                                cDatabase::getcardpanier();
+                            else header('Location: ' . 'selectionSite.php');
                             ?>
-                            <a class="btn btn-danger btn-sm ml-3" href="panier.php">
+                            <a class="btn btn-danger btn-sm ml-3" href="authentification.php">
                                 <i class="fa fa-shopping-cart"></i>Déconnexion
                             </a>
                         <?php } else{ ?>
