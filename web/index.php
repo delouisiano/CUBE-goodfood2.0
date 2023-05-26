@@ -3,6 +3,14 @@
 <?php
 session_start();
 require_once(__DIR__ . '\assets\cDatabase.php');
+
+if(!isset($_SESSION['Compte'])){
+	header('Location: /authentification.php');
+}
+if(!isset($_SESSION['site']) || !isset($_SESSION['panier'])){
+	header('Location: /selectionSite.php');
+}
+
 ?>
 
 <html>
