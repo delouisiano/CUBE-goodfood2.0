@@ -43,44 +43,25 @@ $_SESSION['panier']=null;
         </div>
     </nav>
     
+    <div class="container text-center">
+        <br>
 
-    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <h1>Sites</h1>
+        
+        <div class=" input-group mb-1" style ="max-width:500px;text-align:center;" >
+            <input type="text" class="form-control" id="ville" placeholder="Ville">
+            <button class="btn btn-outline-secondary" onclick="getsitebycity()" type="button">Valider</button>
+        </div>
 
-			<div class="accordion-item">
-		    	<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-		    		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-		        		Sites
-		      		</button>
-		    	</h2>
-		    	<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-		      		<div class="accordion-body">
+        <br>
+    </div>
 
-                        <div class="container text-center">
-                            <br>
-                            <h1 class="">Sites</h1>
-                             <br>
-                        </div>
-
-                        <div class="text-center input-group mb-3" style ="max-width:500px;" >
-                            <input type="text" class="form-control" id="ville" placeholder="Ville" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" onclick="getsitebycity()" type="button">Valider</button>
-                            </div>
-                        </div>
-
-                        <div class="container mb-4">
-                            <div class="row row-cols-1 row-cols-md-3 g-4">
-
-                                <?php
-                                cDatabase::getSites();
-                                ?>         
-                                    
-                            </div>   
-                        </div>
-
-		      		</div>
-		    	</div>
-		  	</div>
+    <div class="container mb-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="div_Site">
+            <?php
+                cDatabase::getSites();
+            ?>                         
+        </div>   
     </div>
 
 </body>
@@ -90,25 +71,23 @@ $_SESSION['panier']=null;
 </html>
 
 <?php
-function sites($name,$img,$content,$id) {
+function sites($name,$img,$content,$id,$ville) {
 ?>
 
 	<div class="col-1">
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
-            <div class="card-header text-center" >
-                <?php echo($name) ?>
+            <div class="card-header text-center">
+                <?php echo($name)?>
             </div>
-                <img src= "<?php echo $img; ?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="text-center">
-                            <?php echo($content) ?>
-                    </div>
-                    <BR>
-                    <div class="text-center">
-                        <button type="submit" onclick="getsite(<?php echo($id) ?>);" class="btn btn-primary">Séléctonner</button>
-                    </div>
-                </div>
+            <img src= "<?php echo $img;?>" class="card-img-top" alt="">
+            <div class="card-body text-center">
+                <?php echo($ville)?>   
+                <BR>            
+                <?php echo($content)?>
+                <BR><BR> 
+                <button type="submit" onclick="getsite(<?php echo($id)?>);" class="btn btn-primary">Séléctonner</button>
             </div>
+        </div>
 	</div>
 
 <?php

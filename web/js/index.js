@@ -46,10 +46,9 @@ if(id>0){
 	
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			let div_aff ="";	
-			
 			res = this.response;
-
+			let div_aff ="";
+			
 			for(let i=0;i<res.length;i++){
 	
 				let libelle = res[i]['libelle']

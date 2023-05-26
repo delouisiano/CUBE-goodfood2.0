@@ -4,24 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-//var_dump($_GET);
-/*
-if (isset($_POST['funcname'])) {
-    $funcname = $_POST['funcname'];
-    unset($_POST['funcname']);
-    try {
-        http_response_code(200);
-        exit(json_encode($funcname($_POST)));
-    } catch (\exception $e) {
-        http_response_code(403);
-        $arr = explode('#', $e->getMessage());
-        if (@$arr[1])
-            exit(json_encode(array('code' => $arr[1], 'msg' => $arr[2])));
-        else
-            exit(json_encode(array('code'=>'99999', 'msg'=>$e->getMessage())));
-    }
-}
-*/
 class cDatabase {
 
     private static $host = "sql511.main-hosting.eu";
@@ -297,14 +279,14 @@ class cDatabase {
 
         $bdd = self::connectDb();
 
-        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description from sites;";
+        $sql = "SELECT id_site,nom,pays,adresse,numero_telephone,code_postal,image,description,ville from sites;";
                 
         $result = $bdd->query($sql);
         $sites = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($sites) {
             forEach($sites as $value) {
-                sites($value['nom'],$value['image'],$value['description'],$value['id_site']);
+                sites($value['nom'],$value['image'],$value['description'],$value['id_site'],$value['ville']);
             }
         } 
 
