@@ -68,16 +68,16 @@ class cDatabase {
 
     static function getmenu() {
         $bdd = self::connectDb();
-        $sql = " SELECT * FROM `articles` where category = 2 and id_site=".$_SESSION['site']['id_site'].";";
+        $sql = " SELECT title,picture,price FROM `menus` where id_site=".$_SESSION['site']['id_site'].";";
 
         $result = $bdd->query($sql);
         $menu = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($menu) {
-                forEach($menu as $value) {
-                    menu($value['title'], $value['picture'],$value['price'],"");
-                }
+            forEach($menu as $value) {
+                menu($value['title'], $value['picture'],$value['price'],"");
             }
+        }
     }
 
     static function getpanier() {

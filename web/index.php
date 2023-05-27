@@ -263,6 +263,98 @@ function menu($name,$img,$price,$content) {
 									</div>
 
 									<div class="modal-body">
+										<br>
+										<h4>Boissons</h4>
+
+										<div class="row row-cols-1 row-cols-md-3 g-4 hidden_scrollbar" style="scrollbar-width: none;-ms-overflow-style: none;overflow-x: hidden; overflow-y: auto; height:400px; width: 470px;margin-left:0px;margin-top:37px;">
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<br>
+										<h4>Sandwichs</h4>
+
+										<div class="row row-cols-1 row-cols-md-3 g-4 hidden_scrollbar" style="scrollbar-width: none;-ms-overflow-style: none;overflow-x: hidden; overflow-y: auto; height:400px; width: 470px;margin-left:0px;margin-top:37px;">
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="card" style="width:115px;height:200px;border-radius: 5px;border:hidden;">
+													<div class="card-body text-center">
+														<img src="assets/Fanta.png" style="width:94px;height:94px;margin-left:-4px;">
+														<h4 style="text-overflow: ellipsis;text-align: center;">blablablablabla</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+
 
 										<h4>Prix :</h4>
 										<h4 id_menu="" id="prix_menu"></h4>
