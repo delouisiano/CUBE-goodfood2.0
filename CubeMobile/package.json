@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
-    "@react-native-async-storage/async-storage": "^1.18.1",
+    "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "axios": "^1.4.0",
@@ -22,8 +22,10 @@
     "react-native-async-storage": "^0.0.1",
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10",
-    "react-navigation-stack": "^2.10.4"
+    "react-navigation-stack": "^2.10.4",
+    "react-vector-icons": "^0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

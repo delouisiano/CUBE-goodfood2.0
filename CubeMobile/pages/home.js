@@ -1,41 +1,40 @@
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// Define an array of card data
-const cards = [];
+import Navbar from './navabar';
 
-// Define a component for each card
-const Card = ({ title, image, description, navigation }) => {
+const Card = ({ title, image, description, id_site, navigation }) => {
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.image} source={image} />
             <Text style={styles.description}>{description}</Text>
-            <Button style={styles.button} title="Commander" onPress={() => navigation.navigate('Restaurant')} />
+            <Button style={styles.button} title="Commander" onPress={() => navigation.navigate('Restaurant', { id_site: id_site })} />
         </View>
     );
 };
 
 // Define the main component that renders the cards in grid
 export default function Home({ navigation }) {
-    const [cards, setCards] = useState([]);
+    const [restaurant, setRestaurant] = useState([]);
 
     useEffect(() => {
         axios.get('http://api/getSites.php')
             .then(function (response) {
                 var img = require("../assets/card1.png");
                 //var img = "../" + e.image;
-                const newCards = response.data.map(e => ({ title: e.nom, image: img, description: e.description }));
-                setCards(newCards);
+                const newRestaurant = response.data.map(e => ({ title: e.nom, image: img, description: e.description, id_site: e.id_site }));
+                setRestaurant(newRestaurant);
             }).catch(function (error) {
                 console.log(error);
             });
     }, []);
     return (
         <View style={styles.content}>
-            {cards.map((card) => (
+            {restaurant.map((card) => (
                 <Card key={card.title} {...card} navigation={navigation} />
             ))}
+            <Navbar />
         </View>
     );
 };

@@ -7,10 +7,46 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Home from './pages/home';
 import Restaurant from './pages/restaurant';
+import Cart from './pages/Cart';
+import { createContext } from 'react';
 
+const mockData = [
+  {
+    id: 1,
+    title: 'Article 1',
+    price: 10,
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    id: 2,
+    title: 'Article 2',
+    price: 20,
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    id: 3,
+    title: 'Article 3',
+    price: 30,
+    image: 'https://via.placeholder.com/150'
+  }
+];
+
+export const CartContext = createContext({
+  data: mockData,
+  setCart: () => { }
+});
 const Stack = createStackNavigator();
 
 const App = () => {
+  setCart = cart => {
+    this.setState({ cart });
+  };
+
+  state = {
+    data: mockData,
+    setCart: this.setCart
+  };
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const signOutTimer = useRef(null);
 
@@ -77,30 +113,22 @@ const App = () => {
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Restaurant" component={Restaurant} />
+            <CartContext.Provider value={this.state}>
+              <Stack.Screen name="Cart " component={Cart} />
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Restaurant" component={Restaurant} />
+            </CartContext.Provider>
           </>
         ) : (
           <>
-            <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="SignIn">
               {props => <SignIn {...props} onSignIn={handleSignIn} />}
             </Stack.Screen>
+            <Stack.Screen name="SignUp" component={SignUp} />
           </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-});
-
 export default App;
