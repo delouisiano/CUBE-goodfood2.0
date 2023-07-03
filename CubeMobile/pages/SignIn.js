@@ -12,7 +12,7 @@ const SignIn = ({ props, onSignIn, navigation }) => {
         params.append('password', password);
 
         var data;
-        await axios.post('http://api/SignIn.php', params)
+        await axios.post('http://apigoodfood/connexion.php', params)
             .then(function (response) {
                 data = response.data;
                 if (data != "") {

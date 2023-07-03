@@ -16,25 +16,23 @@ const Card = ({ title, image, description, id_site, navigation }) => {
 
 // Define the main component that renders the cards in grid
 export default function Home({ navigation }) {
-    const [restaurant, setRestaurant] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        axios.get('http://api/getSites.php')
+        axios.get('http://apigoodfood/getSites.php')
             .then(function (response) {
                 var img = require("../assets/card1.png");
-                //var img = "../" + e.image;
                 const newRestaurant = response.data.map(e => ({ title: e.nom, image: img, description: e.description, id_site: e.id_site }));
-                setRestaurant(newRestaurant);
+                setRestaurants(newRestaurant);
             }).catch(function (error) {
                 console.log(error);
             });
     }, []);
     return (
         <View style={styles.content}>
-            {restaurant.map((card) => (
+            {restaurants.map((card) => (
                 <Card key={card.title} {...card} navigation={navigation} />
             ))}
-            <Navbar />
         </View>
     );
 };

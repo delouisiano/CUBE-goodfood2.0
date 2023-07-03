@@ -7,8 +7,8 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Home from './pages/home';
 import Restaurant from './pages/restaurant';
-import Cart from './pages/Cart';
 import { createContext } from 'react';
+import Cart from './pages/Cart';
 
 const mockData = [
   {
@@ -38,15 +38,7 @@ export const CartContext = createContext({
 const Stack = createStackNavigator();
 
 const App = () => {
-  setCart = cart => {
-    this.setState({ cart });
-  };
-
-  state = {
-    data: mockData,
-    setCart: this.setCart
-  };
-
+  const [cart, setCart] = useState(mockData);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const signOutTimer = useRef(null);
 
@@ -107,17 +99,14 @@ const App = () => {
       }
     }
   };
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <CartContext.Provider value={this.state}>
-              <Stack.Screen name="Cart " component={Cart} />
-              <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="Restaurant" component={Restaurant} />
-            </CartContext.Provider>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Cart " component={Cart} initialParams={{ cartContent: cart }} />
+            <Stack.Screen name="Restaurant" component={Restaurant} />
           </>
         ) : (
           <>
