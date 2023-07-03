@@ -17,6 +17,7 @@ const Dish = ({ title, picture, price, dishId, navigation }) => {
 
 // Define the main component that renders the cards in grid
 export default function Restaurant({ navigation, route }) {
+    console.log(route.params)
     const [dish, setDish] = useState([]);
     useEffect(() => {
         axios.get('http://api/getMenuForSite.php?id_site=' + route.params.id_site)
