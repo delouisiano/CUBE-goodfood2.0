@@ -8,15 +8,16 @@ const SignIn = ({ props, onSignIn, navigation }) => {
 
     const handleSignIn = async () => {
         const params = new URLSearchParams();
-        params.append('email', email);
-        params.append('password', password);
+        params.append('mail', email);
+        params.append('mdp', password);
 
-        var data;
         await axios.post('http://apigoodfood/connexion.php', params)
             .then(function (response) {
-                data = response.data;
-                if (data != "") {
+                if (response.data.id) {
                     onSignIn();
+                }
+                else {
+                    console.log(response.data);
                 }
             }).catch(function (error) {
                 console.log(error);

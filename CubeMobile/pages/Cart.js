@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { useContext } from 'react';
-import { CartContext } from '../App.js';
+import { UserCart } from '../Shared/CartContext';
+
 
 const Cart = ({ route }) => {
-
-    const [cartContent, setcartContent] = useState();
-    //const { cart } = useContext(CartContext);
 
     const handleEdit = (id) => {
         // handle edit logic here
@@ -17,7 +15,7 @@ const Cart = ({ route }) => {
     const handleDelete = (id) => {
         //setArticles(articles.filter((article) => article.id !== id));
     };
-
+    let test = UserCart.content;
     // useEffect(() => {
     //     axios.get('http://api/getMenuForSite.php?id_site=' + route.params.id_site)
     //         .then(function (response) {
@@ -29,44 +27,28 @@ const Cart = ({ route }) => {
     //             console.log(error);
     //         });
     // }, []);
-    return (
-        <View style={styles.cart}>
-            {cartContent.map((article) => (
-                <View key={article.id} style={styles.cartItem}>
-                    <Image
-                        source={{ uri: article.image }}
-                        style={styles.image}
-                    />
-                    <Text style={styles.title}>{article.title}</Text>
-                    <Text style={styles.price}>{article.price}€</Text>
-                    <TouchableOpacity onPress={() => handleEdit(article.id)}>
-                        <Icon name="create-outline" size={30} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleDelete(article.id)}>
-                        <Icon name="trash-outline" size={30} />
-                    </TouchableOpacity>
-                </View>
-            ))}
-        </View>
+    //
 
-        // <CartContext.Consumer>
-        //     <button
-        //         onClick={() =>
-        //             setCart([
-        //                 {
-        //                     id: 3,
-        //                     title: 'Article 3',
-        //                     price: 30,
-        //                     image: 'https://via.placeholder.com/150'
-        //                 }
-        //             ])
-        //         }
-        //     >
-        //         Switch Cart (Current: {cart})
-        //     </button>
-        // </CartContext.Consumer>
+    return (
+        
+            <View style={styles.cart}>
+                {test.map((article) => (
+                    <View key={article.id} style={styles.cartItem}>
+                        <Image source={{ uri: article.image }} style={styles.image} />
+                        <Text style={styles.title}>{article.title}</Text>
+                        <Text style={styles.price}>{article.price}€</Text>
+                        <TouchableOpacity onPress={() => handleEdit(article.id)}>
+                            <Icon name="create-outline" size={30} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleDelete(article.id)}>
+                            <Icon name="trash-outline" size={30} />
+                        </TouchableOpacity>
+                    </View>
+                ))}
+            </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     cart: {

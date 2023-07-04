@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './navabar';
+import Navbar from './Navabar';
 
 const Card = ({ title, image, description, id_site, navigation }) => {
     return (

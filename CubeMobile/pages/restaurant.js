@@ -10,7 +10,7 @@ const Dish = ({ title, picture, price, dishId, navigation }) => {
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.picture} source={picture} />
             <Text style={styles.price}>{price}</Text>
-            <Button style={styles.button} title="Ajouter au panier" />{/* onPress={() => navigation.navigate('Restaurant', { dishId: dishId })}  */}
+            <Button style={styles.button} title="Ajouter au panier" onPress={() => Cart.setCartContent(dishId)}/>
         </View>
     );
 };
@@ -20,11 +20,10 @@ export default function Restaurant({ navigation, route }) {
     const [dish, setDish] = useState([]);
 
     useEffect(() => {
-        axios.get('http://api/getMenuForSite.php?id_site=' + route.params.id_site)
+        axios.get('http://apigoodfood/getMenuForSite.php?id_site=' + route.params.id_site)
             .then(function (response) {
                 var picture = require("../assets/card1.png");
                 //var img = "../" + e.image;
-                console.log(response.data);
                 const newDish = response.data.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.id }));
                 setDish(newDish);
             }).catch(function (error) {

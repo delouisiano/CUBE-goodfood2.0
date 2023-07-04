@@ -5,40 +5,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import Home from './pages/home';
-import Restaurant from './pages/restaurant';
-import { createContext } from 'react';
+import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Account from './pages/Account';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import { UserCart } from './Shared/CartContext';
 
-const mockData = [
-  {
-    id: 1,
-    title: 'Article 1',
-    price: 10,
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 2,
-    title: 'Article 2',
-    price: 20,
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 3,
-    title: 'Article 3',
-    price: 30,
-    image: 'https://via.placeholder.com/150'
-  }
-];
-
-export const CartContext = createContext({
-  data: mockData,
-  setCart: () => { }
-});
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [cart, setCart] = useState(mockData);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const signOutTimer = useRef(null);
 
@@ -99,25 +76,62 @@ const App = () => {
       }
     }
   };
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Cart " component={Cart} initialParams={{ cartContent: cart }} />
-            <Stack.Screen name="Restaurant" component={Restaurant} />
+            <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color, size }) => {
+                if (route.name === 'Home') {
+                  return (
+                    <Ionicons
+                      name={'md-home'}
+                      size={size}
+                      color={color}
+                    />
+                  );
+                } else if (route.name === 'Cart') {
+                  return (
+                    <Ionicons
+                      name={'cart'}
+                      size={size}
+                      color={color}
+                    />
+                  );
+                }else if (route.name === 'Account') {
+                  return (
+                    <Ionicons
+                      name={'person'}
+                      size={size}
+                      color={color}
+                    />
+                  );
+                }
+              },
+              tabBarInactiveTintColor: 'gray',
+              tabBarActiveTintColor: 'blue',
+            })}>
+              
+                  <Tab.Screen name="Home" component={Home} />
+                  <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: UserCart.content.length }} /> 
+                  {/* options={{ tabBarBadge: Cart.cartContent.length }} */}
+                  <Tab.Screen name="Account" component={Account} /> 
+            </Tab.Navigator>
           </>
         ) : (
           <>
+          <Stack.Navigator>
             <Stack.Screen name="SignIn">
               {props => <SignIn {...props} onSignIn={handleSignIn} />}
             </Stack.Screen>
             <Stack.Screen name="SignUp" component={SignUp} />
+          </Stack.Navigator>
           </>
         )}
-      </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
 export default App;
