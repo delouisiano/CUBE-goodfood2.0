@@ -29,7 +29,6 @@ const Cart = ({ route }) => {
     //             console.log(error);
     //         });
     // }, []);
-    console.log(cartContent);
     return (
         <View style={styles.cart}>
             {cartContent.map((article) => (

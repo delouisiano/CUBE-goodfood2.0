@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Dish = ({ title, picture, price, dishId, navigation }) => {
     return (
-        <View style={styles.card}>
+        <View style={styles.dish}>
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.picture} source={picture} />
             <Text style={styles.price}>{price}</Text>
@@ -17,23 +17,24 @@ const Dish = ({ title, picture, price, dishId, navigation }) => {
 
 // Define the main component that renders the cards in grid
 export default function Restaurant({ navigation, route }) {
-    console.log(route.params)
     const [dish, setDish] = useState([]);
+
     useEffect(() => {
         axios.get('http://api/getMenuForSite.php?id_site=' + route.params.id_site)
             .then(function (response) {
                 var picture = require("../assets/card1.png");
                 //var img = "../" + e.image;
-                const newRestaurant = response.data.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.dishId }));
-                setDish(newRestaurant);
+                console.log(response.data);
+                const newDish = response.data.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.id }));
+                setDish(newDish);
             }).catch(function (error) {
                 console.log(error);
             });
     }, []);
     return (
         <View style={styles.content}>
-            {dish.map((card) => (
-                <Dish key={card.title} {...card} navigation={navigation} />
+            {dish.map((dish) => (
+                <Dish key={dish.title} {...dish} navigation={navigation} />
             ))}
         </View>
     );
@@ -41,7 +42,7 @@ export default function Restaurant({ navigation, route }) {
 
 // Define some styles for the components
 const styles = StyleSheet.create({
-    card: {
+    dish: {
         width: 150,
         height: 250,
         margin: 10,
