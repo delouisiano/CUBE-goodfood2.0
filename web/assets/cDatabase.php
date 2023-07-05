@@ -68,28 +68,55 @@ class cDatabase {
 
     static function getmenu() {
         $bdd = self::connectDb();
-        $sql = " SELECT title,picture,price FROM `menus` where id_site=".$_SESSION['site']['id_site'].";";
+        $sql = " SELECT id,title,picture,price FROM `menus` where id_site=".$_SESSION['site']['id_site'].";";
 
         $result = $bdd->query($sql);
         $menu = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($menu) {
             forEach($menu as $value) {
-                menu($value['title'], $value['picture'],$value['price'],"");
+                menu($value['id'],$value['title'], $value['picture'],$value['price'],"");
             }
         }
     }
 
     static function getpanier() {
         $bdd = self::connectDb();
-        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
+        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite,p.id_composition,p.id_menu FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($panier) {
-            forEach($panier as $value) {
-                Article($value['id'],$value['title'],$value['picture'],$value['price'],$value['quantite']);
+            forEach($panier as $value) {        
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                Article($value['id'],$value['title'],$value['picture'],$value['price'],$value['quantite'],$value['id_menu'],$value['id_composition']);
+
+
+
+
+
+
+
+
+
+
+
             }
         }
     }

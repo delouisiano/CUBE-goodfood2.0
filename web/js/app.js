@@ -140,9 +140,16 @@ document.getElementById("connexion").addEventListener("submit", function(e) {
 				if(res == 0){
 					document.querySelector("#erreurco").innerHTML = "Mail ou mot de passe incorrect. Entrez le Mail et le mot de passe corrects et réessayez.";
 				}
-				else{
+				
+				if(res==1){
 					document.location.href="/selectionSite.php";
 				}
+				
+				if(res==2){
+					document.location.href="/Bo.php";
+				}
+					
+				
 			} else if (this.readyState == 4) {
 				alert("Une erreur est survenue...");
 			}

@@ -100,21 +100,62 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 </html>
 
 <?php
-function Article($id,$name,$img,$price,$Quantity) {
-?>
+function Article($id,$name,$img,$price,$Quantity,$id_menu,$id_compo) {
 
+    echo($id_compo);
+
+    if($id_compo!=0){
+
+?>
+  
     <tr>
-        
         <td><img src="<?php echo $img; ?>" style="width:100px;height:100px;" /> </td>
         
-
         <td><?php echo $name ?></td>
         <td ><input class="form-control text-center" type="text"  value="<?php echo $Quantity ?>" /></td>
-        <td class="text-right"><?php echo $price ?></td>
+        <td class="text-right"><?php echo $price ?> <?php echo($id_compo)?></td>
         <td class="text-right"><button class="btn btn-sm btn-danger" onclick="supprArticlePanier(<?php  echo $id  ?>);" value="<?php echo $id ?>">❌</button> </td>
     </tr>
 
 <?php
+
+}
+else{
+
+    if($id_menu!=NULL){
+
+        ?>
+        
+            <tr>
+                <td><img src="<?php echo $img; ?>" style="width:100px;height:100px;" /> </td>
+                
+                <td><?php echo $name ?></td>
+                <td ><input class="form-control text-center" type="text"  value="<?php echo $Quantity ?>" /></td>
+                <td class="text-right"><?php echo $price ?> <?php echo($id_menu)?></td>
+                <td class="text-right"><button class="btn btn-sm btn-danger" onclick="supprArticlePanier(<?php  echo $id  ?>);" value="<?php echo $id ?>">❌</button> </td>
+            </tr>
+        
+        <?php
+        
+        }
+        else{
+        
+            ?>
+        
+            <tr>
+                <td><img src="<?php echo $img; ?>" style="width:100px;height:100px;" /> </td>
+                
+                <td><?php echo $name ?></td>
+                <td ><input class="form-control text-center" type="text"  value="<?php echo $Quantity ?>" /></td>
+                <td class="text-right"><?php echo $price ?></td>
+                <td class="text-right"><button class="btn btn-sm btn-danger" onclick="supprArticlePanier(<?php  echo $id  ?>);" value="<?php echo $id ?>">❌</button> </td>
+            </tr>
+        
+        <?php
+
+        }
+    }
+
 }
 ?>
 
