@@ -2,6 +2,12 @@ import { StyleSheet, View, Text, Image, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navabar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { addToCart } from '../Shared/CartContext';
+
+const Stack = createStackNavigator();
+
 
 const Card = ({ title, image, description, id_site, navigation }) => {
     return (
@@ -9,13 +15,47 @@ const Card = ({ title, image, description, id_site, navigation }) => {
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.image} source={image} />
             <Text style={styles.description}>{description}</Text>
-            <Button style={styles.button} title="Commander" onPress={() => navigation.navigate('Restaurant', { id_site: id_site })} />
+            <Button style={styles.button} title="Commander" onPress={() => navigation.navigate('Restaurant', { id_site })} />
+        </View>
+    );
+};
+
+const Dish = ({ title, picture, price, dishId, navigation }) => {
+    return (
+        <View style={styles.dish}>
+            <Text style={styles.title}>{title}</Text>
+            <Image style={styles.picture} source={picture} />
+            <Text style={styles.price}>{price}</Text>
+            <Button style={styles.button} title="Ajouter au panier" onPress={() => addToCart(dishId)}/>
         </View>
     );
 };
 
 // Define the main component that renders the cards in grid
-export default function Home({ navigation }) {
+ function Restaurant({ navigation, route }) {
+    const [dish, setDish] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://apigoodfood/getMenuForSite.php?id_site=' + route.params.id_site)
+            .then(function (response) {
+                var picture = require("../assets/card1.png");
+                //var img = "../" + e.image;
+                const newDish = response.data.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.id }));
+                setDish(newDish);
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+    return (
+        <View style={styles.content}>
+            {dish.map((dish) => (
+                <Dish key={dish.title} {...dish} navigation={navigation} />
+            ))}
+        </View>
+    );
+};
+
+function RestaurantList({ navigation, route }) {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
@@ -28,12 +68,21 @@ export default function Home({ navigation }) {
                 console.log(error);
             });
     }, []);
-    return (
+    return(
         <View style={styles.content}>
-            {restaurants.map((card) => (
-                <Card key={card.title} {...card} navigation={navigation} />
-            ))}
+            {restaurants.map((card) => (<Card key={card.title} {...card} navigation={navigation} />))}
         </View>
+    );
+};
+
+// Define the main component that renders the cards in grid
+export default function Home({ navigation }) {
+    
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='Restaurant List' component={RestaurantList} />
+            <Stack.Screen name='Restaurant' component={Restaurant} />
+        </Stack.Navigator>
     );
 };
 

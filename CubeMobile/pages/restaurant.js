@@ -16,7 +16,7 @@ const Dish = ({ title, picture, price, dishId, navigation }) => {
 };
 
 // Define the main component that renders the cards in grid
-export default function Restaurant({ navigation, route }) {
+ const Restaurant = ({ navigation, route }) => {
     const [dish, setDish] = useState([]);
 
     useEffect(() => {
@@ -83,3 +83,5 @@ const styles = StyleSheet.create({
 
     }
 });
+
+export default Restaurant;

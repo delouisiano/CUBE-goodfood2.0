@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const Account = ({ route }) => {
 
+    state = {
+        user: {}
+    };
+
     return (
-        
-            <View style={styles.cart}>
-                <Text style={styles.placeholder}>Ici Bientôt votre compte. (inch)</Text>
-            </View>
+        <View style={styles.cart}>
+            <Text style={styles.title}>{user.id}</Text>
+            <Text style={styles.title}>{user.pseudo}</Text>
+            <Text style={styles.title}>{user.mail}</Text>
+            <Text style={styles.title}>{user.langue}</Text>
+        </View>
     );
 };
 
@@ -19,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    placeholder: {
+    title: {
         fontWeight: 'bold'
     }
 });

@@ -8,6 +8,11 @@ import { UserCart } from '../Shared/CartContext';
 
 const Cart = ({ route }) => {
 
+    let cart = UserCart.content;
+
+    const addItem = (id) => {
+        this.cart = [...cart, id];
+    }
     const handleEdit = (id) => {
         // handle edit logic here
     };
@@ -15,7 +20,6 @@ const Cart = ({ route }) => {
     const handleDelete = (id) => {
         //setArticles(articles.filter((article) => article.id !== id));
     };
-    let test = UserCart.content;
     // useEffect(() => {
     //     axios.get('http://api/getMenuForSite.php?id_site=' + route.params.id_site)
     //         .then(function (response) {
@@ -30,9 +34,8 @@ const Cart = ({ route }) => {
     //
 
     return (
-        
             <View style={styles.cart}>
-                {test.map((article) => (
+                {cart.map((article) => (
                     <View key={article.id} style={styles.cartItem}>
                         <Image source={{ uri: article.image }} style={styles.image} />
                         <Text style={styles.title}>{article.title}</Text>

@@ -114,10 +114,11 @@ const App = () => {
               tabBarActiveTintColor: 'blue',
             })}>
               
-                  <Tab.Screen name="Home" component={Home} />
-                  <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: UserCart.content.length }} /> 
-                  {/* options={{ tabBarBadge: Cart.cartContent.length }} */}
-                  <Tab.Screen name="Account" component={Account} /> 
+              <Tab.Screen name="Home" component={Home} />
+              { UserCart.content.length 
+              ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: UserCart.content.length }} />
+              : <Tab.Screen name="Cart" component={Cart} /> }
+              <Tab.Screen name="Account" component={Account} />
             </Tab.Navigator>
           </>
         ) : (
