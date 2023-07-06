@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './Navabar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { addToCart } from '../Shared/CartContext';
@@ -26,13 +25,13 @@ const Dish = ({ title, picture, price, dishId, navigation }) => {
             <Text style={styles.title}>{title}</Text>
             <Image style={styles.picture} source={picture} />
             <Text style={styles.price}>{price}</Text>
-            <Button style={styles.button} title="Ajouter au panier" onPress={() => addToCart(dishId)}/>
+            <Button style={styles.button} title="Ajouter au panier" onPress={() => addToCart(dishId)} />
         </View>
     );
 };
 
 // Define the main component that renders the cards in grid
- function Restaurant({ navigation, route }) {
+function Restaurant({ navigation, route }) {
     const [dish, setDish] = useState([]);
 
     useEffect(() => {
@@ -68,7 +67,7 @@ function RestaurantList({ navigation, route }) {
                 console.log(error);
             });
     }, []);
-    return(
+    return (
         <View style={styles.content}>
             {restaurants.map((card) => (<Card key={card.title} {...card} navigation={navigation} />))}
         </View>
@@ -77,7 +76,7 @@ function RestaurantList({ navigation, route }) {
 
 // Define the main component that renders the cards in grid
 export default function Home({ navigation }) {
-    
+
     return (
         <Stack.Navigator>
             <Stack.Screen name='Restaurant List' component={RestaurantList} />
