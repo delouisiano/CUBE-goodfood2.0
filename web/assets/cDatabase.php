@@ -82,40 +82,33 @@ class cDatabase {
 
     static function getpanier() {
         $bdd = self::connectDb();
-        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite,p.id_composition,p.id_menu FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
+        $sql = " SELECT a.id,a.price,a.picture,a.title,p.id,p.quantite,p.id_composition,p.id_menu,p.prix FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $panier = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if ($panier) {
-            forEach($panier as $value) {        
 
-              
+            forEach($panier as $value) {   
+                
+                
+                $title=$value['title'];
+                $picture = $value['picture'];
+                $price = $value['prix'];
 
+                if($value['id_menu']!=NULL){
 
+                    $sql = "SELECT m.picture,m.title FROM menus m,menus_crea c where c.id_menu = m.id and c.id=".$value['id_menu'];
+                    
+                    $result = $bdd->query($sql);
+                    $panier = $result->fetchAll(PDO::FETCH_ASSOC);
+   
+                    $title=$panier[0]['title'];
+                    $picture=$panier[0]['picture'];
 
+                }
 
-
-
-
-
-
-
-
-
-
-
-                Article($value['id'],$value['title'],$value['picture'],$value['price'],$value['quantite'],$value['id_menu'],$value['id_composition']);
-
-
-
-
-
-
-
-
-
-
+                Article($value['id'],$title,$picture,$price,$value['quantite']);
 
             }
         }
@@ -137,7 +130,7 @@ class cDatabase {
 
     static function getSousTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
+        $sql = " SELECT sum(prix*quantite) as price FROM lignes_paniers  where id_panier = ".$_SESSION['panier']['id']."; ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -151,7 +144,7 @@ class cDatabase {
 
     static function getTotal() {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_paniers p,articles a where a.id = p.id_article and p.id_panier = ".$_SESSION['panier']['id']."; ";
+        $sql = "SELECT sum(prix*quantite) as price FROM lignes_paniers  where id_panier = ".$_SESSION['panier']['id'].";";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);

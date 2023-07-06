@@ -368,10 +368,4 @@ function adddeclinaison(){
 	
 	return false;
 
-
-
-
-
-
-
 }

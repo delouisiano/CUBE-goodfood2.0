@@ -69,7 +69,46 @@ require_once(__DIR__ . '\assets\cDatabase.php');
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <?php
                                 cDatabase::getAdressUser();
-                                ?>                   
+                                ?>           
+                                <div class="col-1">
+
+                                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+
+                                        <div class="card-header">
+                                            Ajouter une adresse
+                                        </div>
+                                        
+                                        <div class="card-body text-secondary">
+                                        <div class="mb-3">
+
+                                        <label class="form-label">Nom</label>
+                                        <input type="txt" class="form-control" id="nom">
+                                        <div class="help" id="nomHelp" style="color:red;" class="form-text"></div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                        <label class="form-label">Adresse</label>
+                                        <input type="txt" class="form-control" id="Adresse">
+                                        <div class="help" id="prenomHelp" style="color:red;" class="form-text"></div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                        <label class="form-label">Ville</label>
+                                        <input type="txt" class="form-control" id="ville">
+                                        <div class="help" id="prenomHelp" style="color:red;" class="form-text"></div>
+                                        </div>   
+
+                                        <div class="mb-3">
+                                        <label class="form-label">Code Postal</label>
+                                        <input type="txt" class="form-control" id="cp">
+                                        <div class="help" id="prenomHelp" style="color:red;" class="form-text"></div>
+                                        </div> 
+
+                                        <button type="button" onclick="addAdresse();" class="btn btn-success">Valider</button>
+
+                                    </div>
+                                </div>
+                            </div>        
                             </div>   
                         </div>
 
@@ -89,7 +128,7 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 			    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
 			     	<div class="accordion-body">
                      <div class="container text-center">
-                        <button type="button" onclick = "getAdressUser()" class="btn btn-success">Valider</button>              
+                        <button type="button" onclick = "addCommande()" class="btn btn-success">Valider</button>              
                     </div>
 			  	   	</div>
 			  	</div>

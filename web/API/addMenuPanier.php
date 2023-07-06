@@ -23,7 +23,7 @@
     $result = $bdd->query($sql);
   }
 
-  $sql = "INSERT INTO `menus_crea` (`id`) VALUES (NULL)";
+  $sql = "INSERT INTO `menus_crea` (`id`,id_menu) VALUES (NULL,".$id_menu.")";
   $result = $bdd->query($sql);
 
   $id_menu_crea = $bdd->lastInsertId();
