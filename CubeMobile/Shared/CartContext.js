@@ -22,14 +22,25 @@ const mockData = [
 ];
 
 export let UserCart = {
-  content: []
+  ids: [],
+  products: [{
+    product: 0,
+    quantity: 0
+  }]
 };
 
-export const addToCart = (id) => {
-  UserCart.content.push(id);
-  console.log(UserCart);
+export const addToCart = (id) => { 
+  let toAdd = true;
+  UserCart.ids.forEach(element => {
+    if (element == id) {
+      toAdd = false
+    }
+  });
+  if (toAdd) {
+    UserCart.ids.push(id);
+  }
 }
 
 export const CartContext = React.createContext(
-  UserCart.content // default value
+  UserCart.ids // default value
 );

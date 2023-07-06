@@ -115,8 +115,8 @@ const App = () => {
             })}>
               
               <Tab.Screen name="Home" component={Home} />
-              { UserCart.content.length 
-              ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: UserCart.content.length }} />
+              { UserCart.ids.length 
+              ? <Tab.Screen name="Cart" component={Cart} options={{ tabBarBadge: UserCart.ids.length }} />
               : <Tab.Screen name="Cart" component={Cart} /> }
               <Tab.Screen name="Account" component={Account} />
             </Tab.Navigator>

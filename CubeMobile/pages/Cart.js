@@ -16,15 +16,23 @@ const Cart = ({ route }) => {
         axios.get('http://apigoodfood/getMenuForSite.php?id_site=1')
             .then(function (response) {
                 var picture = require("../assets/card1.png");
-                var tmpCart = [];
-                if (response.data != null) {
-                    response.data.forEach(e => {
-                        if (UserCart.content.find(element => element > e.id) != undefined) {
-                            tmpCart.push(e);
+                let tmpCart = [];
+                response.data.forEach(eResponse => {
+                    eResponse.quantity = 1;
+                    UserCart.ids.forEach(eUserCart => {
+                        if (eResponse.id == eUserCart) {
+                            // if(tmpCart.find(e => e = e.response)) {
+                            //     // if (eTmpCart.id == UserCart) {
+                            //     //     eResponse.quantity+=1;
+                            //     // }
+                            //     console.log(e)
+                            // }
+                            console.log()
+                            tmpCart.push(eResponse);
                         }
                     });
-                }
-                const newCart = tmpCart.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.id }));
+                });
+                const newCart = tmpCart.map(e => ({ title: e.title, picture: picture, price: e.price, dishId: e.id, quantity: e.quantity }));
                 setCart(newCart);
             }).catch(function (error) {
                 console.log(error);
@@ -39,6 +47,7 @@ const Cart = ({ route }) => {
                     <Image source={{ uri: article.image }} style={styles.image} />
                     <Text style={styles.title}>{article.title}</Text>
                     <Text style={styles.price}>{article.price}€</Text>
+                    <Text style={styles.price}>{article.quantity} pcs.</Text>
                     <TouchableOpacity onPress={() => handleEdit(article.id)}>
                         <Icon name="create-outline" size={30} />
                     </TouchableOpacity>
