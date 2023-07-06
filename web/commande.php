@@ -10,6 +10,13 @@ require_once(__DIR__ . '\assets\cDatabase.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
+
+<style>
+    .bla,.table-striped{
+        border:1px solid black;
+    }
+</style>
+
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -58,7 +65,7 @@ require_once(__DIR__ . '\assets\cDatabase.php');
 <div class="container mb-4">
     <div class="row">
         <div class="col-14">
-            <div class="table-responsive">
+            <div class="table-responsive bla">
 
                 <table class="table table-striped">
                     <tbody>
@@ -81,10 +88,7 @@ function getlignescommandes($name,$img,$price,$Quantity) {
 ?>
 
     <tr>
-        <!--
-        <td><img src="<?php echo $img; ?>" /> </td>
-        -->
-        <td><img src="<?php echo "..."; ?>" /> </td>
+        <td><img style="height:50px;width:50px;" src="<?php echo $img; ?>" /> </td>
         <td><?php echo $name ?></td>
         <td><input class="form-control" type="text" value="<?php echo $Quantity ?>" /></td>
         <td class="text-right"><?php echo $price ?>  €</td>

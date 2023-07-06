@@ -123,7 +123,22 @@ class cDatabase {
 
         if ($lignescommandes) {
             forEach($lignescommandes as $value) {
-                getlignescommandes($value['title'],$value['picture'],$value['price']*$value['quantite'],$value['quantite']);
+
+                if($value['id_menu']!=0){
+                    $sql = "SELECT m.picture,m.title FROM menus m,menus_crea c where c.id_menu = m.id and c.id=".$value['id_menu'];
+
+                    $result = $bdd->query($sql);
+                    $menu = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                    getlignescommandes($menu[0]['title'],$menu[0]['picture'],$value['prix']*$value['quantite'],$value['quantite']);
+
+                }
+                else{
+
+                    getlignescommandes($value['title'],$value['picture'],$value['prix']*$value['quantite'],$value['quantite']);
+
+                }
+                
             }
         }
     }
@@ -158,7 +173,7 @@ class cDatabase {
 
     static function getSousTotalCommande($id_commande) {
         $bdd = self::connectDb();
-        $sql = "SELECT sum(a.price*p.quantite) as price FROM lignes_commandes p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . "";
+        $sql = "SELECT sum(p.prix*p.quantite) as price FROM lignes_commandes p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . "";
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -171,7 +186,7 @@ class cDatabase {
 
     static function getTotalCommande($id_commande) {
         $bdd = self::connectDb();
-        $sql = " SELECT sum(a.price*p.quantite) as price FROM lignes_commandes  p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . " ";
+        $sql = " SELECT sum(p.prix*p.quantite) as price FROM lignes_commandes  p,articles a where a.id = p.id_article and p.id_commande = " . $id_commande . " ";
 
         $result = $bdd->query($sql);
         $tt = $result->fetchAll(PDO::FETCH_ASSOC);

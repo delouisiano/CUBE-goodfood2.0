@@ -42,7 +42,7 @@
         $result = $bdd->query($sql);
 
 
-        $sql = "INSERT INTO `lignes_commandes` (`id`, `id_commande`, `id_site`, `id_article`, `id_composition`, `prix`, `quantite`, `id_user`) VALUES (NULL, '".$id_cde."', '".$id_site."', '".$id_article."', '".$id_composition."', '".$prix."', '".$quantite."', '".$id_user."');";
+        $sql = "INSERT INTO `lignes_commandes` (`id`, `id_commande`, `id_site`, `id_article`, `id_composition`,id_menu, `prix`, `quantite`, `id_user`) VALUES (NULL, '".$id_cde."', '".$id_site."', '".$id_article."', '".$id_composition."','".$id_menu."', '".$prix."', '".$quantite."', '".$id_user."');";
         $result = $bdd->query($sql);
 
       }
