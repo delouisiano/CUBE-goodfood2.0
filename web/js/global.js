@@ -7,5 +7,5 @@ function geturl(page){
 	origin = document.location.origin;		
 	url=origin+"/"+page;
     console.log(url);
-	location = url;
+	//location = url;
 }
